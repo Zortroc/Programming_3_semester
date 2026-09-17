@@ -12,6 +12,7 @@ namespace Model
         public string Speciality { set; get; }
         public string Group { set; get; }
 
-        public string Testing { set; get; }
+
+
     }
 }
