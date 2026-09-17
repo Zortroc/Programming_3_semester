@@ -67,7 +67,8 @@ namespace BusinessLogic
                         }
                     }
 
-                    histogram.Add(student.Speciality + ": " + count); // выводим строку с результатами
+                    histogram.Add(student.Speciality + ": " + count); 
+                    /// выводим строку с результатами для каждого студента, к примеру "ИТ: 3"
 
                     specialities.Add(student.Speciality);
                     /// и к концу те спец-сти, что мы обработали помечаем,
