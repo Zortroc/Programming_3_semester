@@ -34,9 +34,17 @@ namespace BusinessLogic
             }
         }
 
-        public List<Student> ListAllStudents()
+        public List<string> ListAllStudents()
         {
-            return students; 
+            List<String> result = new List<string>();
+
+            foreach (Student student in students)
+            {
+                result.Add(student.Name + " | " + student.Speciality + " | " + student.Group);
+            }
+
+            return result;
+
         }
         // создали метод, который просто возвращает весь список, 
         // students будут расписаны уже благодаря set и get в начале Logic.cs

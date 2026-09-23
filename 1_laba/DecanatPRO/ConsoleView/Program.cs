@@ -31,19 +31,50 @@ namespace ConsoleView
 
                 if (choice == "1")
                 {
-                    AddStudent();
+                    Console.Write("Введите ФИО: ");
+                    string name = Console.ReadLine();
+
+                    Console.Write("Введите специальность: ");
+                    string speciality = Console.ReadLine();
+
+                    Console.Write("Введите группу: ");
+                    string group = Console.ReadLine();
+
+                    // Вызываем метод из BusinessLogic
+                    logic.AddStudent(name, speciality, group);
+                    Console.WriteLine("Студент добавлен!");
                 }
-                else if (choice == "2")
+                else if (choice == "2") // под вопросом.
                 {
-                    DeleteStudent();
+                    Console.Write("Введите ФИО удаляемого студента: ");
+                    string name = Console.ReadLine();
+
+                    Console.Write("Введите специальность: ");
+                    string speciality = Console.ReadLine();
+
+                    Console.Write("Введите группу: ");
+                    string group = Console.ReadLine();
+
+                    // Вызываем метод удаления из BusinessLogic
+                    logic.DeleteStudent(name, speciality, group);
+                    Console.WriteLine("Студент удален (если такой нашлся).");
                 }
                 else if (choice == "3")
                 {
-                    ListAllStudents();
+                    Console.WriteLine("Список всех студентов:");
+                    foreach (string list in logic.ListAllStudents())
+                    {
+                        Console.WriteLine(list);
+                    }
                 }
+
                 else if (choice == "4")
                 {
-                    ShowHistogram();
+                    Console.WriteLine("Гистограмма");
+                    foreach (string list in logic.ShowHistogram())
+                    {
+                        Console.WriteLine(list);
+                    }
                 }
                 else if (choice == "0")
                 {
@@ -57,78 +88,6 @@ namespace ConsoleView
                 // после выполнения действия прога не сразу вернется в меню, поэтому требуем инпута от пользователя
                 Console.WriteLine("\nНажмите любую клавишу...");
                 Console.ReadKey();
-            }
-        }
-
-        // прописываем методы по очереди
-        static void AddStudent()
-        {
-            Console.WriteLine("Добавление нового студента...");
-
-            Console.Write("Введите ФИО: ");
-            string name = Console.ReadLine();
-
-            Console.Write("Введите специальность: ");
-            string speciality = Console.ReadLine();
-
-            Console.Write("Введите группу: ");
-            string group = Console.ReadLine();
-
-            // передаем данные в бизнес-логику
-            // именно Logic создает объект Student и добавляет его в список students
-            logic.AddStudent(name, speciality, group);
-
-            Console.WriteLine("\nСтудент добавлен");
-        }
-
-        static void DeleteStudent()
-        {
-            Console.WriteLine("Удалить студента...");
-           
-            Console.Write("Введите ФИО: ");
-            string name = Console.ReadLine();
-
-            Console.Write("Введите специальность: ");
-            string speciality = Console.ReadLine();
-
-            Console.Write("Введите группу: ");
-            string group = Console.ReadLine();
-
-            // снова передаем данные в логику
-            // внутри Logic прога находит нужного студента, а затем удаляет его
-            logic.DeleteStudent(name, speciality, group);
-
-            Console.WriteLine("\nСтудент удален");
-        }
-
-        static void ListAllStudents()
-        { // короче тут ошибка, потому что компилятор не видит ссылку на Student,
-          // который берется из класса Model, но прикол в том,
-          // что нам нельзя делать связь ConsoleView -> Model, поэтому надо подумать что сделать
-            List<Student> allStudents = logic.ListAllStudents();
-        }
-
-        static void ShowHistogram()
-        {
-            // вызываем метод ShowHistogram из Logic
-            // он возвращает лист, то есть весь список данных для студента
-            List<string> histogram = logic.ShowHistogram();
-
-            // если список пустой, значит студентов ещё нет и строить статистику не из чего
-            if (histogram.Count == 0)
-            {
-                Console.WriteLine("Гистограмму невозможно построить, список пуст");
-                return;
-            }
-
-            Console.WriteLine("Распределение студентов по специальностям...\n");
-
-            // перебираем строки, к-ые вернул Logic
-            // например, сначала line = "ИТ: 3",
-            // затем line = "Дизайн: 1"
-            foreach (string line in histogram)
-            {
-                Console.WriteLine(line);
             }
         }
     }
