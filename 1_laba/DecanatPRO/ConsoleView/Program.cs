@@ -50,7 +50,7 @@ namespace ConsoleView
                 }
                 else
                 {
-                    Console.WriteLine("Выберите из один предложенных пунктов!");
+                    Console.WriteLine("Выберите один из предложенных пунктов!");
                 }
 
                 Console.WriteLine("\nНажмите любую клавишу...");
@@ -91,7 +91,14 @@ namespace ConsoleView
 
             logic.DeleteStudent(name, speciality, group);
 
-            Console.WriteLine("\nСтудент удален);
+            Console.WriteLine("\nСтудент удален");
         }
+
+        static void ListAllStudents()
+        {
+            List<Student> allStudents = logic.ListAllStudents(); // короче тут ошибка, потому что компилятор не видит ссылку на Student, который берется из класса Model, но прикол в том, что нам нельзя делать связь ConsoleView -> Model, поэтому надо подумать что сделать
+        }
+
+
     }
 }
