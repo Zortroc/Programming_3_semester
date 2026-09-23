@@ -99,6 +99,22 @@ namespace ConsoleView
             List<Student> allStudents = logic.ListAllStudents(); // короче тут ошибка, потому что компилятор не видит ссылку на Student, который берется из класса Model, но прикол в том, что нам нельзя делать связь ConsoleView -> Model, поэтому надо подумать что сделать
         }
 
+        static void ShowHistogram()
+        {
+            List<string> histogram = logic.ShowHistogram();
 
+            if (histogram.Count == 0)
+            {
+                Console.WriteLine("Гистограмму невозможно построить, список пуст");
+                return;
+            }
+
+            Console.WriteLine("Распределение студентов по специальностям...");
+
+            foreach (string line in histogram)
+            {
+                Console.WriteLine(line);
+            }
+        }
     }
 }
