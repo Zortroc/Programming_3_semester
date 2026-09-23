@@ -75,5 +75,23 @@ namespace ConsoleView
 
             Console.WriteLine("\nСтудент добавлен");
         }
+
+        static void DeleteStudetn()
+        {
+            Console.WriteLine("Удалить студента...");
+           
+            Console.Write("Введите ФИО: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Введите специальность: ");
+            string speciality = Console.ReadLine();
+
+            Console.Write("Введите группу: ");
+            string group = Console.ReadLine();
+
+            logic.DeleteStudent(name, speciality, group);
+
+            Console.WriteLine("\nСтудент удален);
+        }
     }
 }
