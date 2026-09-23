@@ -29,35 +29,65 @@ namespace ConsoleView
                 // очищаем консоль, чтобы результат блы на новом экране 
                 Console.Clear();
 
-                if (choice == "1")
+                if (choice == "1") //доработать
                 {
-                    Console.Write("Введите ФИО: ");
-                    string name = Console.ReadLine();
+                    List<string> fields = new List<string> { "ФИО", "Специальность", "Группа" };
+                    List<string> values = new List<string>();
 
-                    Console.Write("Введите специальность: ");
-                    string speciality = Console.ReadLine();
+                    foreach (string field in fields)
+                    {
+                        string input;
+                        do
+                        {
+                            Console.Write($"введите {field}: ");
+                            input = Console.ReadLine().Trim();
+                            while (input.Contains("  "))
+                            {
+                                input = input.Replace("  ", " ");
+                            }
 
-                    Console.Write("Введите группу: ");
-                    string group = Console.ReadLine();
+                            if (string.IsNullOrWhiteSpace(input))
+                            {
+                                Console.WriteLine($"ошибка: поле [{field}] не может быть пустым.");
+                            }
+                        }
+                        while (string.IsNullOrWhiteSpace(input));
 
-                    // Вызываем метод из BusinessLogic
-                    logic.AddStudent(name, speciality, group);
-                    Console.WriteLine("Студент добавлен!");
+                        values.Add(input);
+                    }
+
+                    string newStudent = string.Join(" | ", values);
+
+                    if (logic.ListAllStudents().Contains(newStudent))
+                    {
+                        Console.WriteLine("ошибка: такой студент уже существует.");
+                    }
+                    else
+                    {
+                        logic.AddStudent(values[0], values[1], values[2]);
+                        Console.WriteLine("студент успешно добавлен.");
+                    }
                 }
                 else if (choice == "2") // под вопросом.
                 {
-                    Console.Write("Введите ФИО удаляемого студента: ");
+                    Console.Write("введите фио студента для удаления: ");
                     string name = Console.ReadLine();
 
-                    Console.Write("Введите специальность: ");
-                    string speciality = Console.ReadLine();
+                    string result = logic.DeleteStudent(name);
+                    Console.WriteLine(result);
 
-                    Console.Write("Введите группу: ");
-                    string group = Console.ReadLine();
+                    // если нашлись тезки, метод как раз выдаст текст с просьбой уточнить
+                    if (result.Contains("укажите специальность"))
+                    {
+                        Console.Write("уточните специальность: ");
+                        string speciality = Console.ReadLine();
 
-                    // Вызываем метод удаления из BusinessLogic
-                    logic.DeleteStudent(name, speciality, group);
-                    Console.WriteLine("Студент удален (если такой нашлся).");
+                        Console.Write("уточните группу: ");
+                        string group = Console.ReadLine();
+
+                        // повторный вызов уже с полными данными
+                        Console.WriteLine(logic.DeleteStudent(name, speciality, group));
+                    }
                 }
                 else if (choice == "3")
                 {

@@ -17,21 +17,39 @@ namespace BusinessLogic
         {
             students.Add(new Student { Name = name, Speciality = speciality, Group = group });
         }
-        public void DeleteStudent(string name, string speciality, string group) 
+        public string DeleteStudent(string name, string speciality = "", string group = "") 
         {
-            foreach (Student student in students)
+            List<Student> found = new List<Student>();
+            foreach (Student s in students)
             {
-                if (student.Name == name && 
-                    student.Speciality == speciality &&
-                    student.Group == group)
-                {
-                    // сначала находим конкретного студента по фио и ток потом удаляем его
-                    // а до этого мы просто создавали новый объект через students.Remove(new Student...)
+                bool nameMatches = s.Name == name;
+                bool specMatches = string.IsNullOrEmpty(speciality) || s.Speciality == speciality;
+                bool groupMatches = string.IsNullOrEmpty(group) || s.Group == group;
 
-                    students.Remove(student);
-                    break;
+                if (nameMatches && specMatches && groupMatches)
+                {
+                    found.Add(s);
                 }
             }
+
+            if (found.Count == 0)
+            {
+                return "студент не найден.";
+            }
+
+            if (found.Count == 1)
+            {
+                students.Remove(found[0]);
+                return "студент успешно удален.";
+            }
+
+            string warning = "найдено несколько совпадений:\n";
+            foreach (Student s in found)
+            {
+                warning += s.Name + " | " + s.Speciality + " | " + s.Group + "\n";
+            }
+            warning += "укажите специальность и группу для точного удаления.";
+            return warning;
         }
 
         public List<string> ListAllStudents()
@@ -40,7 +58,7 @@ namespace BusinessLogic
 
             foreach (Student student in students)
             {
-                result.Add(student.Name + " | " + student.Speciality + " | " + student.Group);
+                result.Add(string.Join(" | ", student.Name, student.Speciality, student.Group));
             }
 
             return result;
