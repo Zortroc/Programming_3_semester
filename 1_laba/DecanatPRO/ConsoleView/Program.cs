@@ -41,8 +41,8 @@ namespace ConsoleView
                 }
                 else if (choice == "3")
                 {
-                    Console.WriteLine("Список всех студентов:");
-                    foreach (string list in logic.ListAllStudents())
+                    Console.WriteLine("Список всех студентов в таблице:");
+                    foreach (string list in logic.ShowTableList())
                     {
                         Console.WriteLine(list);
                     }

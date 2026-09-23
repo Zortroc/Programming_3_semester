@@ -69,7 +69,7 @@ namespace BusinessLogic
         }
         
 
-        public List<string> ListAllStudents()
+        public List<string> ShowTableList()
         {
             List<String> result = new List<string>();
 
