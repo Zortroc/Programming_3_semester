@@ -7,6 +7,8 @@ using BusinessLogic;
 
 namespace ConsoleView
 {
+
+    //ОТСУТСТВУЮТ ADD|DELETE STUDENT METHODS. (НЕДОРАБОТАНО)
     internal class Program
     {
         // создаём один объект Logic, в к-ом хранится список студентов и методы
@@ -31,63 +33,11 @@ namespace ConsoleView
 
                 if (choice == "1") //доработать
                 {
-                    List<string> fields = new List<string> { "ФИО", "Специальность", "Группа" };
-                    List<string> values = new List<string>();
-
-                    foreach (string field in fields)
-                    {
-                        string input;
-                        do
-                        {
-                            Console.Write($"введите {field}: ");
-                            input = Console.ReadLine().Trim();
-                            while (input.Contains("  "))
-                            {
-                                input = input.Replace("  ", " ");
-                            }
-
-                            if (string.IsNullOrWhiteSpace(input))
-                            {
-                                Console.WriteLine($"ошибка: поле [{field}] не может быть пустым.");
-                            }
-                        }
-                        while (string.IsNullOrWhiteSpace(input));
-
-                        values.Add(input);
-                    }
-
-                    string newStudent = string.Join(" | ", values);
-
-                    if (logic.ListAllStudents().Contains(newStudent))
-                    {
-                        Console.WriteLine("ошибка: такой студент уже существует.");
-                    }
-                    else
-                    {
-                        logic.AddStudent(values[0], values[1], values[2]);
-                        Console.WriteLine("студент успешно добавлен.");
-                    }
+                    break;    //намудрила..
                 }
                 else if (choice == "2") // под вопросом.
                 {
-                    Console.Write("введите фио студента для удаления: ");
-                    string name = Console.ReadLine();
-
-                    string result = logic.DeleteStudent(name);
-                    Console.WriteLine(result);
-
-                    // если нашлись тезки, метод как раз выдаст текст с просьбой уточнить
-                    if (result.Contains("укажите специальность"))
-                    {
-                        Console.Write("уточните специальность: ");
-                        string speciality = Console.ReadLine();
-
-                        Console.Write("уточните группу: ");
-                        string group = Console.ReadLine();
-
-                        // повторный вызов уже с полными данными
-                        Console.WriteLine(logic.DeleteStudent(name, speciality, group));
-                    }
+                    break;    //намудрила
                 }
                 else if (choice == "3")
                 {

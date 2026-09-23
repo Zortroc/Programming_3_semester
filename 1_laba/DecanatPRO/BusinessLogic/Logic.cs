@@ -17,40 +17,57 @@ namespace BusinessLogic
         {
             students.Add(new Student { Name = name, Speciality = speciality, Group = group });
         }
-        public string DeleteStudent(string name, string speciality = "", string group = "") 
+        public void DeleteStudent(string name, string speciality = "", string group = "")
         {
+            List<string> values = new List<string> { name, speciality, group };
+
+            for (int i = 0; i < values.Count; i++)
+            {
+                values[i] = values[i].Trim();
+                while (values[i].Contains("  "))
+                {
+                    values[i] = values[i].Replace("  ", " ");
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(values[0]))
+            {
+                throw new Exception("ошибка: ФИО не может быть пустым.");
+            }
+
             List<Student> found = new List<Student>();
             foreach (Student s in students)
             {
-                bool nameMatches = s.Name == name;
-                bool specMatches = string.IsNullOrEmpty(speciality) || s.Speciality == speciality;
-                bool groupMatches = string.IsNullOrEmpty(group) || s.Group == group;
-
-                if (nameMatches && specMatches && groupMatches)
+                if (s.Name == values[0])
                 {
-                    found.Add(s);
+                    if (string.IsNullOrEmpty(values[1]) || s.Speciality == values[1])
+                    {
+                        if (string.IsNullOrEmpty(values[2]) || s.Group == values[2])
+                        {
+                            found.Add(s);
+                        }
+                    }
                 }
             }
 
             if (found.Count == 0)
             {
-                return "студент не найден.";
+                throw new Exception("ошибка: студент не найден.");
             }
 
-            if (found.Count == 1)
+            if (found.Count > 1)
             {
-                students.Remove(found[0]);
-                return "студент успешно удален.";
+                string list = "найдено несколько совпадений:\n";
+                for (int i = 0; i < found.Count; i++)
+                {
+                    list += $"{i + 1}. {found[i].Name} | {found[i].Speciality} | {found[i].Group}\n";
+                }
+                throw new Exception(list + "уточните данные.");
             }
 
-            string warning = "найдено несколько совпадений:\n";
-            foreach (Student s in found)
-            {
-                warning += s.Name + " | " + s.Speciality + " | " + s.Group + "\n";
-            }
-            warning += "укажите специальность и группу для точного удаления.";
-            return warning;
+            students.Remove(found[0]);
         }
+        
 
         public List<string> ListAllStudents()
         {
