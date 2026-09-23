@@ -108,7 +108,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AddStudentForm";
-            this.Text = "AddStudentForm";
+            this.Text = "Пополнение";
             this.ResumeLayout(false);
             this.PerformLayout();
 

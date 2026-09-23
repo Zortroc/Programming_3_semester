@@ -19,12 +19,6 @@ namespace WindowView
             InitializeComponent();
             logic = new Logic();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
             AddStudentForm addForm = new AddStudentForm(logic);
@@ -42,6 +36,11 @@ namespace WindowView
         }
 
         private void btnShowHistogram_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
         {
 
         }
