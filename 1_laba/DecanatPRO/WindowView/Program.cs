@@ -12,6 +12,9 @@ namespace WindowView
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+
+        // НЕ ТРОГАТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         [STAThread]
         static void Main()
         {
