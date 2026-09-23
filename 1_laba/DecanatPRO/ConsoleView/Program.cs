@@ -58,6 +58,22 @@ namespace ConsoleView
             }
         }
 
+        static void AddStudent()
+        {
+            Console.WriteLine("Добавление нового студента...");
 
+            Console.Write("Введите ФИО: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Введите специальность: ");
+            string speciality = Console.ReadLine();
+
+            Console.Write("Введите группу: ");
+            string group = Console.ReadLine();
+
+            logic.AddStudent(name, speciality, group);
+
+            Console.WriteLine("\nСтудент добавлен");
+        }
     }
 }
