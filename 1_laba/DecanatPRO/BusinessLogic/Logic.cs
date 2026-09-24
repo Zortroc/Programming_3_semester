@@ -76,10 +76,10 @@ namespace BusinessLogic
             });
         }
         
-        public void DeleteStudent(string name, string speciality = "", string group = "")
+        public void DeleteStudent(int studentNumber)
         {
+            students.RemoveAt(studentNumber - 1);   
         }
-        
 
         public List<string> ShowTableList()
         {
@@ -87,7 +87,7 @@ namespace BusinessLogic
 
             foreach (Student student in students)
             {
-                result.Add(string.Join(" | ", student.Name, student.Speciality, student.Group));
+                result.Add(string.Join(" ", student.Name, student.Speciality, student.Group));
             }
 
             return result;
