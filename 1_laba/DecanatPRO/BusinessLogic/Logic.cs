@@ -44,6 +44,22 @@ namespace BusinessLogic
                 throw new Exception("ошибка: группа не может быть пустой.");
             }
 
+            foreach (char symbol in values[0])
+            {
+                if (char.IsDigit(symbol))
+                {
+                    throw new Exception("ошибка: ФИО не должно содержать цифры");
+                }
+            }
+
+            foreach (char symbol in values[1])
+            {
+                if (char.IsDigit(symbol))
+                {
+                    throw new Exception("ошибка: направление не должно содержать цифры");
+                }
+            }
+
             foreach (Student s in students)
             {
                 if (s.Name == values[0] && s.Speciality == values[1] && s.Group == values[2])
