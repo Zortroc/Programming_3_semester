@@ -33,7 +33,42 @@ namespace ConsoleView
 
                 if (choice == "1") //доработать
                 {
-                    break;    //намудрила..
+                    List<string> fields = new List<string> { "ФИО", "Специальность", "Группа" };
+                    List<string> values = new List<string>();
+
+                    foreach (string field in fields)
+                    {
+                        string input;
+                        do
+                        {
+                            Console.Write($"введите {field}: ");
+                            input = Console.ReadLine().Trim();
+                            while (input.Contains("  "))
+                            {
+                                input = input.Replace("  ", " ");
+                            }
+
+                            if (string.IsNullOrWhiteSpace(input))
+                            {
+                                Console.WriteLine($"ошибка: поле [{field}] не может быть пустым.");
+                            }
+                        }
+                        while (string.IsNullOrWhiteSpace(input));
+
+                        values.Add(input);
+                    }
+
+                    string newStudent = string.Join(" | ", values);
+
+                    if (logic.ShowTableList().Contains(newStudent))
+                    {
+                        Console.WriteLine("ошибка: такой студент уже существует.");
+                    }
+                    else
+                    {
+                        logic.AddStudent(values[0], values[1], values[2]);
+                        Console.WriteLine("студент успешно добавлен.");
+                    }
                 }
                 else if (choice == "2") // под вопросом.
                 {
