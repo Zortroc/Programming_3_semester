@@ -43,7 +43,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.18F);
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(186, 33);
             this.label1.TabIndex = 0;
@@ -53,7 +53,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.12F);
-            this.label2.Location = new System.Drawing.Point(13, 45);
+            this.label2.Location = new System.Drawing.Point(13, 153);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 25);
             this.label2.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             // btnAddStudent
             // 
-            this.btnAddStudent.Location = new System.Drawing.Point(17, 81);
+            this.btnAddStudent.Location = new System.Drawing.Point(17, 189);
             this.btnAddStudent.Name = "btnAddStudent";
             this.btnAddStudent.Size = new System.Drawing.Size(142, 23);
             this.btnAddStudent.TabIndex = 2;
@@ -72,7 +72,7 @@
             // 
             // btnDeleteStudent
             // 
-            this.btnDeleteStudent.Location = new System.Drawing.Point(18, 110);
+            this.btnDeleteStudent.Location = new System.Drawing.Point(18, 218);
             this.btnDeleteStudent.Name = "btnDeleteStudent";
             this.btnDeleteStudent.Size = new System.Drawing.Size(141, 23);
             this.btnDeleteStudent.TabIndex = 2;
@@ -83,7 +83,7 @@
             // 
             // btnShowTableList
             // 
-            this.btnShowTableList.Location = new System.Drawing.Point(18, 139);
+            this.btnShowTableList.Location = new System.Drawing.Point(18, 247);
             this.btnShowTableList.Name = "btnShowTableList";
             this.btnShowTableList.Size = new System.Drawing.Size(141, 42);
             this.btnShowTableList.TabIndex = 2;
@@ -94,7 +94,7 @@
             // 
             // btnShowHistogram
             // 
-            this.btnShowHistogram.Location = new System.Drawing.Point(18, 187);
+            this.btnShowHistogram.Location = new System.Drawing.Point(18, 295);
             this.btnShowHistogram.Name = "btnShowHistogram";
             this.btnShowHistogram.Size = new System.Drawing.Size(141, 58);
             this.btnShowHistogram.TabIndex = 2;
@@ -108,7 +108,7 @@
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(220, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(220, 120);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(554, 233);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

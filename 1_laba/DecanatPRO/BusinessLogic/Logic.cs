@@ -15,57 +15,53 @@ namespace BusinessLogic
 
         public void AddStudent(string name, string speciality, string group) 
         {
-            students.Add(new Student { Name = name, Speciality = speciality, Group = group });
+            List<string> values = new List<string> { name, speciality, group };
+
+            for (int i = 0; i < values.Count; i++)
+            {
+                if (values[i] != null)
+                {
+                    values[i] = values[i].Trim();
+                    while (values[i].Contains("  "))
+                    {
+                        values[i] = values[i].Replace("  ", " ");
+                    }
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(values[0]))
+            {
+                throw new Exception("ошибка: ФИО не может быть пустым.");
+            }
+
+            if (string.IsNullOrWhiteSpace(values[1]))
+            {
+                throw new Exception("ошибка: направление не может быть пустым.");
+            }
+
+            if (string.IsNullOrWhiteSpace(values[2]))
+            {
+                throw new Exception("ошибка: группа не может быть пустой.");
+            }
+
+            foreach (Student s in students)
+            {
+                if (s.Name == values[0] && s.Speciality == values[1] && s.Group == values[2])
+                {
+                    throw new Exception("ошибка: такой студент уже существует.");
+                }
+            }
+
+            students.Add(new Student
+            {
+                Name = values[0],
+                Speciality = values[1],
+                Group = values[2]
+            });
         }
+        
         public void DeleteStudent(string name, string speciality = "", string group = "")
         {
-            //List<string> values = new List<string> { name, speciality, group };
-
-            //for (int i = 0; i < values.Count; i++)
-            //{
-            //    values[i] = values[i].Trim();
-            //    while (values[i].Contains("  "))
-            //    {
-            //        values[i] = values[i].Replace("  ", " ");
-            //    }
-            //}
-
-            //if (string.IsNullOrWhiteSpace(values[0]))
-            //{
-            //    throw new Exception("ошибка: ФИО не может быть пустым.");
-            //}
-
-            //List<Student> found = new List<Student>();
-            //foreach (Student s in students)
-            //{
-            //    if (s.Name == values[0])
-            //    {
-            //        if (string.IsNullOrEmpty(values[1]) || s.Speciality == values[1])
-            //        {
-            //            if (string.IsNullOrEmpty(values[2]) || s.Group == values[2])
-            //            {
-            //                found.Add(s);
-            //            }
-            //        }
-            //    }
-            //}
-
-            //if (found.Count == 0)
-            //{
-            //    throw new Exception("ошибка: студент не найден.");
-            //}
-
-            //if (found.Count > 1)
-            //{
-            //    string list = "найдено несколько совпадений:\n";
-            //    for (int i = 0; i < found.Count; i++)
-            //    {
-            //        list += $"{i + 1}. {found[i].Name} | {found[i].Speciality} | {found[i].Group}\n";
-            //    }
-            //    throw new Exception(list + "уточните данные.");
-            //}
-
-            //students.Remove(found[0]);
         }
         
 

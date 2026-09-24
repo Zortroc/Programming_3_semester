@@ -19,30 +19,32 @@ namespace WindowView
             InitializeComponent();
             logic = new Logic();
         }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+        }
+        
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("В разработке");
             AddStudentForm addForm = new AddStudentForm(logic);
             addForm.ShowDialog();
         }
 
         private void btnDeleteStudent_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("В разработке");
         }
 
         private void btnShowTableList_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("В разработке");
 
         }
 
         private void btnShowHistogram_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("В разработке");
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
