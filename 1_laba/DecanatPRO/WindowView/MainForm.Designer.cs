@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddStudent = new System.Windows.Forms.Button();
             this.btnDeleteStudent = new System.Windows.Forms.Button();
             this.btnShowTableList = new System.Windows.Forms.Button();
             this.btnShowHistogram = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -100,11 +103,25 @@
             this.btnShowHistogram.UseVisualStyleBackColor = true;
             this.btnShowHistogram.Click += new System.EventHandler(this.btnShowHistogram_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(220, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(554, 233);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnShowHistogram);
             this.Controls.Add(this.btnShowTableList);
             this.Controls.Add(this.btnDeleteStudent);
@@ -114,6 +131,7 @@
             this.Name = "MainForm";
             this.Text = "ДеканатПРО МЕНЮ";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,6 +145,7 @@
         private System.Windows.Forms.Button btnDeleteStudent;
         private System.Windows.Forms.Button btnShowTableList;
         private System.Windows.Forms.Button btnShowHistogram;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
