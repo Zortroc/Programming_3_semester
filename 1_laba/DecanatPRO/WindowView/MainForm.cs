@@ -21,11 +21,11 @@ namespace WindowView
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            RefreshTable();
         }
         
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("В разработке");
             AddStudentForm addForm = new AddStudentForm(logic);
             addForm.ShowDialog();
             RefreshTable();
@@ -33,7 +33,31 @@ namespace WindowView
 
         private void btnDeleteStudent_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("В разработке");
+            if (dgvStudents.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите студента для удаления.");
+                return;
+            }
+
+            int studentNumber = dgvStudents.SelectedRows[0].Index + 1;
+
+            try
+            {
+                logic.DeleteStudent(studentNumber);
+
+                MessageBox.Show(
+                    "Студент успешно удалён.",
+                    "Удаление",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                RefreshTable();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnShowTableList_Click(object sender, EventArgs e)
@@ -52,10 +76,18 @@ namespace WindowView
         {
             dgvStudents.Rows.Clear();
 
-            logic.ShowTableList((name, speciality, group) =>
+            List<string[]> result = new List<string[]>();
+
+            logic.ShowTableList(result);
+
+            foreach (string[] student in result)
             {
-                dgvStudents.Rows.Add(name, speciality, group);
-            });
+                dgvStudents.Rows.Add(
+                    student[0],
+                    student[1],
+                    student[2]
+                );
+            }
         }
     }
 }

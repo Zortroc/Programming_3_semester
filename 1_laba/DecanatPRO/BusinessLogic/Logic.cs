@@ -10,8 +10,12 @@ namespace BusinessLogic
 {
     public class Logic
     {
-        public List<Student> students { set; get; }
-            = new List<Student>();
+        public List<Student> students { get; set; } = new List<Student>
+        {
+            new Student { Name = "Иванов Иван", Speciality = "Прикладная информатика", Group = "ГФ25-02Б" },
+            new Student { Name = "Петров Петр", Speciality = "Программная инженерия",  Group = "ПИ25-01" },
+            new Student { Name = "О Степан", Speciality = "Лечебное дело",  Group = "ЛД26-01Б" },
+        };
 
         public void AddStudent(string name, string speciality, string group)
         {
@@ -124,15 +128,15 @@ namespace BusinessLogic
 
 
         public void ShowTableList(
-            Action<string, string, string> showStudent)
+            List<string> names,
+            List<string> specialities,
+            List<string> groups)
         {
             foreach (Student student in students)
             {
-                showStudent(
-                    student.Name,
-                    student.Speciality,
-                    student.Group
-                );
+                names.Add(student.Name);
+                specialities.Add(student.Speciality);
+                groups.Add(student.Group);
             }
         }
 

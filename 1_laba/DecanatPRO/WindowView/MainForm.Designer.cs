@@ -33,7 +33,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddStudent = new System.Windows.Forms.Button();
             this.btnDeleteStudent = new System.Windows.Forms.Button();
-            this.btnShowTableList = new System.Windows.Forms.Button();
             this.btnShowHistogram = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dgvStudents = new System.Windows.Forms.DataGridView();
@@ -66,7 +65,7 @@
             // 
             // btnAddStudent
             // 
-            this.btnAddStudent.Location = new System.Drawing.Point(17, 78);
+            this.btnAddStudent.Location = new System.Drawing.Point(353, 346);
             this.btnAddStudent.Name = "btnAddStudent";
             this.btnAddStudent.Size = new System.Drawing.Size(142, 23);
             this.btnAddStudent.TabIndex = 2;
@@ -77,7 +76,7 @@
             // 
             // btnDeleteStudent
             // 
-            this.btnDeleteStudent.Location = new System.Drawing.Point(18, 107);
+            this.btnDeleteStudent.Location = new System.Drawing.Point(501, 346);
             this.btnDeleteStudent.Name = "btnDeleteStudent";
             this.btnDeleteStudent.Size = new System.Drawing.Size(141, 23);
             this.btnDeleteStudent.TabIndex = 2;
@@ -86,20 +85,9 @@
             this.btnDeleteStudent.UseVisualStyleBackColor = true;
             this.btnDeleteStudent.Click += new System.EventHandler(this.btnDeleteStudent_Click);
             // 
-            // btnShowTableList
-            // 
-            this.btnShowTableList.Location = new System.Drawing.Point(18, 136);
-            this.btnShowTableList.Name = "btnShowTableList";
-            this.btnShowTableList.Size = new System.Drawing.Size(141, 42);
-            this.btnShowTableList.TabIndex = 2;
-            this.btnShowTableList.Text = "Список студентов в таблицу";
-            this.btnShowTableList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShowTableList.UseVisualStyleBackColor = true;
-            this.btnShowTableList.Click += new System.EventHandler(this.btnShowTableList_Click);
-            // 
             // btnShowHistogram
             // 
-            this.btnShowHistogram.Location = new System.Drawing.Point(18, 184);
+            this.btnShowHistogram.Location = new System.Drawing.Point(354, 380);
             this.btnShowHistogram.Name = "btnShowHistogram";
             this.btnShowHistogram.Size = new System.Drawing.Size(141, 58);
             this.btnShowHistogram.TabIndex = 2;
@@ -113,21 +101,22 @@
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(191, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(18, 99);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(130, 233);
+            this.pictureBox1.Size = new System.Drawing.Size(266, 270);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
             // dgvStudents
             // 
+            this.dgvStudents.AllowUserToAddRows = false;
             this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3});
-            this.dgvStudents.Location = new System.Drawing.Point(18, 248);
+            this.dgvStudents.Location = new System.Drawing.Point(354, 6);
             this.dgvStudents.MultiSelect = false;
             this.dgvStudents.Name = "dgvStudents";
             this.dgvStudents.ReadOnly = true;
@@ -170,7 +159,6 @@
             this.Controls.Add(this.dgvStudents);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnShowHistogram);
-            this.Controls.Add(this.btnShowTableList);
             this.Controls.Add(this.btnDeleteStudent);
             this.Controls.Add(this.btnAddStudent);
             this.Controls.Add(this.label2);
@@ -191,7 +179,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddStudent;
         private System.Windows.Forms.Button btnDeleteStudent;
-        private System.Windows.Forms.Button btnShowTableList;
         private System.Windows.Forms.Button btnShowHistogram;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dgvStudents;
