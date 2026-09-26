@@ -36,14 +36,19 @@
             this.btnShowTableList = new System.Windows.Forms.Button();
             this.btnShowHistogram = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dgvStudents = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.18F);
-            this.label1.Location = new System.Drawing.Point(12, 117);
+            this.label1.Location = new System.Drawing.Point(12, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(186, 33);
             this.label1.TabIndex = 0;
@@ -53,7 +58,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.12F);
-            this.label2.Location = new System.Drawing.Point(13, 153);
+            this.label2.Location = new System.Drawing.Point(13, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 25);
             this.label2.TabIndex = 1;
@@ -61,7 +66,7 @@
             // 
             // btnAddStudent
             // 
-            this.btnAddStudent.Location = new System.Drawing.Point(17, 189);
+            this.btnAddStudent.Location = new System.Drawing.Point(17, 78);
             this.btnAddStudent.Name = "btnAddStudent";
             this.btnAddStudent.Size = new System.Drawing.Size(142, 23);
             this.btnAddStudent.TabIndex = 2;
@@ -72,7 +77,7 @@
             // 
             // btnDeleteStudent
             // 
-            this.btnDeleteStudent.Location = new System.Drawing.Point(18, 218);
+            this.btnDeleteStudent.Location = new System.Drawing.Point(18, 107);
             this.btnDeleteStudent.Name = "btnDeleteStudent";
             this.btnDeleteStudent.Size = new System.Drawing.Size(141, 23);
             this.btnDeleteStudent.TabIndex = 2;
@@ -83,7 +88,7 @@
             // 
             // btnShowTableList
             // 
-            this.btnShowTableList.Location = new System.Drawing.Point(18, 247);
+            this.btnShowTableList.Location = new System.Drawing.Point(18, 136);
             this.btnShowTableList.Name = "btnShowTableList";
             this.btnShowTableList.Size = new System.Drawing.Size(141, 42);
             this.btnShowTableList.TabIndex = 2;
@@ -94,7 +99,7 @@
             // 
             // btnShowHistogram
             // 
-            this.btnShowHistogram.Location = new System.Drawing.Point(18, 295);
+            this.btnShowHistogram.Location = new System.Drawing.Point(18, 184);
             this.btnShowHistogram.Name = "btnShowHistogram";
             this.btnShowHistogram.Size = new System.Drawing.Size(141, 58);
             this.btnShowHistogram.TabIndex = 2;
@@ -108,12 +113,53 @@
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(220, 120);
+            this.pictureBox1.Location = new System.Drawing.Point(191, 6);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(554, 233);
+            this.pictureBox1.Size = new System.Drawing.Size(130, 233);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
+            // 
+            // dgvStudents
+            // 
+            this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3});
+            this.dgvStudents.Location = new System.Drawing.Point(18, 248);
+            this.dgvStudents.MultiSelect = false;
+            this.dgvStudents.Name = "dgvStudents";
+            this.dgvStudents.ReadOnly = true;
+            this.dgvStudents.RowHeadersWidth = 51;
+            this.dgvStudents.RowTemplate.Height = 24;
+            this.dgvStudents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvStudents.Size = new System.Drawing.Size(434, 190);
+            this.dgvStudents.TabIndex = 4;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "ФИО";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Направление";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 125;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Группа";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 125;
             // 
             // MainForm
             // 
@@ -121,6 +167,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dgvStudents);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnShowHistogram);
             this.Controls.Add(this.btnShowTableList);
@@ -132,6 +179,7 @@
             this.Text = "ДеканатПРО МЕНЮ";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,6 +194,10 @@
         private System.Windows.Forms.Button btnShowTableList;
         private System.Windows.Forms.Button btnShowHistogram;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.DataGridView dgvStudents;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }
 

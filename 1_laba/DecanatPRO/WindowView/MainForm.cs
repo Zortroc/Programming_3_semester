@@ -28,6 +28,7 @@ namespace WindowView
             MessageBox.Show("В разработке");
             AddStudentForm addForm = new AddStudentForm(logic);
             addForm.ShowDialog();
+            RefreshTable();
         }
 
         private void btnDeleteStudent_Click(object sender, EventArgs e)
@@ -46,5 +47,15 @@ namespace WindowView
             MessageBox.Show("В разработке");
         }
 
+        // Метод обновления таблицы
+        private void RefreshTable()
+        {
+            dgvStudents.Rows.Clear();
+
+            logic.ShowTableList((name, speciality, group) =>
+            {
+                dgvStudents.Rows.Add(name, speciality, group);
+            });
+        }
     }
 }
