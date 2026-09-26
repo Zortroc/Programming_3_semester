@@ -7,8 +7,6 @@ using BusinessLogic;
 
 namespace ConsoleView
 {
-
-    //ОТСУТСТВУЮТ ADD|DELETE STUDENT METHODS. (НЕДОРАБОТАНО)
     internal class Program
     {
         // создаём один объект Logic, в к-ом хранится список студентов и методы

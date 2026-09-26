@@ -8,9 +8,11 @@ using Model;
 
 namespace BusinessLogic
 {
+
+    
     public class Logic
     {
-        public List<Student> students { get; set; } = new List<Student>();
+        private List<Student> students { get; set; } = new List<Student>();
 
         public Logic()
         {
