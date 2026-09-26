@@ -38,7 +38,40 @@ namespace ConsoleView
 
                 else if (choice == "2") // под вопросом.
                 {
-                    break;    //намудрила
+                    List<string> tableList = logic.ShowTableList();
+                    
+                    if (tableList.Count == 0)
+                    {
+                        Console.WriteLine("удаление невозможно: список студентов пуст.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("список студентов:\n");
+
+                        for (int i = 0; i < tableList.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}. {tableList[i]}");
+                        }
+
+                        int studentNumber;
+
+                        while (true)
+                        {
+                            Console.Write("\nвведите номер студента для удаления: ");
+
+                            string input = Console.ReadLine();
+
+                            if (!int.TryParse(input, out studentNumber) || studentNumber < 1 || studentNumber > tableList.Count)
+                            {
+                                Console.WriteLine("ошибка: введите номер студента из списка.");
+                                continue;
+                            }
+                            break;
+                        }
+                        logic.DeleteStudent(studentNumber);
+
+                        Console.WriteLine("студент удален.");
+                    }
                 }
 
                 else if (choice == "3")
