@@ -33,23 +33,26 @@ namespace WindowView
 
         private void btnDeleteStudent_Click(object sender, EventArgs e)
         {
-            if (dgvStudents.SelectedRows.Count == 0)
+            if (dgvStudents.CurrentRow == null)
             {
                 MessageBox.Show("Выберите студента для удаления.");
                 return;
             }
 
-            int studentNumber = dgvStudents.SelectedRows[0].Index + 1;
+            int i = dgvStudents.CurrentRow.Index;
 
-            try
-            {
-                logic.DeleteStudent(studentNumber);
-                RefreshTable();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            List<string[]> studentsList = new List<string[]>();
+            logic.ShowTableList(studentsList);
+
+            string[] student = studentsList[i];
+
+            string name = student[0];
+            string speciality = student[1];
+            string group = student[2];
+
+            logic.DeleteStudent(name, speciality, group);
+            RefreshTable();
+
         }
 
         private void btnShowTableList_Click(object sender, EventArgs e)
@@ -64,7 +67,6 @@ namespace WindowView
             form.ShowDialog();
         }
 
-        // Метод обновления таблицы
         private void RefreshTable()
         {
             dgvStudents.Rows.Clear();

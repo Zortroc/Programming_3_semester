@@ -14,23 +14,9 @@ namespace BusinessLogic
 
         public Logic()
         {
-            AddStudent(
-                "Иванов Иван Иванович",
-                "Прикладная информатика",
-                "ГФ25-02Б"
-            );
-
-            AddStudent(
-                "Петров Петр",
-                "Программная инженерия",
-                "ПИ25-01"
-            );
-
-            AddStudent(
-                "О Степан",
-                "Лечебное дело",
-                "ЛД26-01Б"
-            );
+            AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
+            AddStudent("Петров Петр Леонидович", "Программная инженерия", "ПИ25-01");
+            AddStudent("О Степан Дебилович", "Лечебное дело", "ЛД26-01Б");
         }
 
         public void AddStudent(string name, string speciality, string group)
@@ -40,137 +26,106 @@ namespace BusinessLogic
 
             for (int i = 0; i < values.Length; i++)
             {
-                // Убираем пробелы в начале и конце,
-                // а также повторяющиеся пробелы
-                if (values[i] != null)
-                {
-                    values[i] = values[i].Trim();
+                values[i] = (values[i] ?? "").Trim();
 
-                    while (values[i].Contains("  "))
-                    {
-                        values[i] = values[i].Replace("  ", " ");
-                    }
+                while (values[i].Contains("  "))
+                {
+                    values[i] = values[i].Replace("  ", " ");
                 }
 
-                // Проверка на пустое поле
                 if (string.IsNullOrWhiteSpace(values[i]))
                 {
-                    throw new Exception(
-                        "ошибка: " + fieldNames[i] + " не может быть пустым."
-                    );
+                    throw new Exception($"ошибка: {fieldNames[i]} не может быть пустым.");
                 }
 
-                // Проверка ФИО и направления
-                if (i < 2)
+                if (fieldNames[i] == "ФИО")
                 {
-                    foreach (char symbol in values[i])
+                    if (values[i].Count(space => space == ' ') != 2)
+                        throw new Exception ("ФИО должно содержать фамилию, имя и отчество.");
+                }
+
+                if (fieldNames[i] != "группа")
+                {
+                    foreach (char s in values[i])
                     {
-                        if (!char.IsLetter(symbol) && symbol != ' ')
-                        {
-                            throw new Exception(
-                                "ошибка: " + fieldNames[i] +
-                                " может содержать только буквы и пробелы."
-                            );
-                        }
+                        if (!char.IsLetter(s) && 
+                            s != ' ')
+                            throw new Exception($"ошибка: {fieldNames[i]} может содержать только буквы и пробелы.");
                     }
                 }
-
-                // Проверка группы
                 else
                 {
-                    foreach (char symbol in values[i])
+                    foreach (char s in values[i])
                     {
-                        if (!char.IsLetterOrDigit(symbol) && symbol != '-')
-                        {
-                            throw new Exception(
-                                "ошибка: группа может содержать только буквы, цифры и дефис."
-                            );
-                        }
+                        if (!char.IsLetterOrDigit(s) &&
+                            s != '-')
+                            throw new Exception("ошибка: группа может содержать только буквы, цифры и дефис.");
                     }
 
-                    // Дефис не может быть первым или последним символом
-                    if (values[i][0] == '-' ||
-                        values[i][values[i].Length - 1] == '-')
-                    {
-                        throw new Exception(
-                            "ошибка: группа не может начинаться или заканчиваться дефисом."
-                        );
-                    }
+                    if (values[i].StartsWith("-") ||
+                        values[i].EndsWith("-"))
+                        throw new Exception("ошибка: группа не может начинаться или заканчиваться дефисом.");
 
-                    // Два дефиса подряд запрещены
                     if (values[i].Contains("--"))
-                    {
-                        throw new Exception(
-                            "ошибка: группа не может содержать два дефиса подряд."
-                        );
-                    }
+                        throw new Exception("ошибка: группа не может содержать два дефиса подряд.");
                 }
             }
 
-            // Проверка на дубликат
             foreach (Student student in students)
             {
                 if (student.Name == values[0] &&
                     student.Speciality == values[1] &&
                     student.Group == values[2])
                 {
-                    throw new Exception(
-                        "ошибка: такой студент уже существует."
-                    );
+                    throw new Exception("ошибка: такой студент уже существует.");
                 }
             }
 
-            // Добавление студента
-            students.Add(new Student
-            {
-                Name = values[0],
-                Speciality = values[1],
-                Group = values[2]
-            });
+            students.Add(new Student { Name = values[0], Speciality = values[1], Group = values[2]});
         }
 
-
-        public void DeleteStudent(int studentNumber)
+        public void DeleteStudent(string name, string speciality, string group)
         {
-            if (studentNumber < 1 || studentNumber > students.Count)
+            foreach (Student student in students)
             {
-                throw new Exception(
-                    "ошибка: студента с таким номером нет."
-                );
+                if (student.Name == name &&
+                    student.Speciality == speciality &&
+                    student.Group == group)
+                {
+                    students.Remove(student);
+                    return;
+                }
             }
 
-            students.RemoveAt(studentNumber - 1);
+            throw new Exception("студент не найден.");
         }
-
 
         public void ShowTableList(List<string[]> studentsList)
         {
             foreach (Student student in students)
             {
-                studentsList.Add(new string[]
-                {
-            student.Name,
-            student.Speciality,
-            student.Group
-                });
+                studentsList.Add(new string[]{student.Name, student.Speciality, student.Group});
             }
         }
 
 
-        public void ShowHistogram(List<string> specialities, List<int> counts)
+        public void ShowHistogram(List<string> x, List<int> y)
         {
+            List<string> specialities = x;
+            List<int> counts = y;
+
             foreach (Student student in students)
             {
-                int index = specialities.IndexOf(student.Speciality);
+                int i = specialities.IndexOf(student.Speciality);
 
-                if (index == -1)
+                if (i == -1)
                 {
                     specialities.Add(student.Speciality);
                     counts.Add(1);
                 }
                 else
                 {
-                    counts[index]++;
+                    counts[i]++;
                 }
             }
         }
