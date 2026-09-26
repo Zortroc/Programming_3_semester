@@ -10,12 +10,28 @@ namespace BusinessLogic
 {
     public class Logic
     {
-        public List<Student> students { get; set; } = new List<Student>
+        public List<Student> students { get; set; } = new List<Student>();
+
+        public Logic()
         {
-            new Student { Name = "Иванов Иван", Speciality = "Прикладная информатика", Group = "ГФ25-02Б" },
-            new Student { Name = "Петров Петр", Speciality = "Программная инженерия",  Group = "ПИ25-01" },
-            new Student { Name = "О Степан", Speciality = "Лечебное дело",  Group = "ЛД26-01Б" },
-        };
+            AddStudent(
+                "Иванов Иван Иванович",
+                "Прикладная информатика",
+                "ГФ25-02Б"
+            );
+
+            AddStudent(
+                "Петров Петр",
+                "Программная инженерия",
+                "ПИ25-01"
+            );
+
+            AddStudent(
+                "О Степан",
+                "Лечебное дело",
+                "ЛД26-01Б"
+            );
+        }
 
         public void AddStudent(string name, string speciality, string group)
         {
@@ -127,41 +143,34 @@ namespace BusinessLogic
         }
 
 
-        public void ShowTableList(
-            List<string> names,
-            List<string> specialities,
-            List<string> groups)
+        public void ShowTableList(List<string[]> studentsList)
         {
             foreach (Student student in students)
             {
-                names.Add(student.Name);
-                specialities.Add(student.Speciality);
-                groups.Add(student.Group);
+                studentsList.Add(new string[]
+                {
+            student.Name,
+            student.Speciality,
+            student.Group
+                });
             }
         }
 
 
-        public void ShowHistogram(
-            Action<string, int> showSpeciality)
+        public void ShowHistogram(List<string> specialities, List<int> counts)
         {
-            List<string> specialities = new List<string>();
-
             foreach (Student student in students)
             {
-                if (!specialities.Contains(student.Speciality))
+                int index = specialities.IndexOf(student.Speciality);
+
+                if (index == -1)
                 {
-                    int count = 0;
-
-                    foreach (Student item in students)
-                    {
-                        if (item.Speciality == student.Speciality)
-                        {
-                            count++;
-                        }
-                    }
-
-                    showSpeciality(student.Speciality, count);
                     specialities.Add(student.Speciality);
+                    counts.Add(1);
+                }
+                else
+                {
+                    counts[index]++;
                 }
             }
         }

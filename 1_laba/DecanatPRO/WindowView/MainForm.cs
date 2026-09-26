@@ -44,14 +44,6 @@ namespace WindowView
             try
             {
                 logic.DeleteStudent(studentNumber);
-
-                MessageBox.Show(
-                    "Студент успешно удалён.",
-                    "Удаление",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
-
                 RefreshTable();
             }
             catch (Exception ex)
@@ -68,7 +60,8 @@ namespace WindowView
 
         private void btnShowHistogram_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("В разработке");
+            HistogramForm form = new HistogramForm(logic);
+            form.ShowDialog();
         }
 
         // Метод обновления таблицы
@@ -76,17 +69,13 @@ namespace WindowView
         {
             dgvStudents.Rows.Clear();
 
-            List<string[]> result = new List<string[]>();
+            List<string[]> studentsList = new List<string[]>();
 
-            logic.ShowTableList(result);
+            logic.ShowTableList(studentsList);
 
-            foreach (string[] student in result)
+            foreach (string[] student in studentsList)
             {
-                dgvStudents.Rows.Add(
-                    student[0],
-                    student[1],
-                    student[2]
-                );
+                dgvStudents.Rows.Add(student);
             }
         }
     }

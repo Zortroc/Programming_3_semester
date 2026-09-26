@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddStudentForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,7 +41,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 16);
+            this.label1.Location = new System.Drawing.Point(18, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 16);
             this.label1.TabIndex = 0;
@@ -49,7 +50,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(150, 16);
+            this.label2.Location = new System.Drawing.Point(18, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 16);
             this.label2.TabIndex = 0;
@@ -58,7 +59,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(299, 16);
+            this.label3.Location = new System.Drawing.Point(18, 131);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 16);
             this.label3.TabIndex = 0;
@@ -66,30 +67,30 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(20, 46);
+            this.txtName.Location = new System.Drawing.Point(20, 39);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 22);
+            this.txtName.Size = new System.Drawing.Size(218, 22);
             this.txtName.TabIndex = 1;
             // 
             // txtSpeciality
             // 
-            this.txtSpeciality.Location = new System.Drawing.Point(153, 46);
+            this.txtSpeciality.Location = new System.Drawing.Point(20, 95);
             this.txtSpeciality.Name = "txtSpeciality";
-            this.txtSpeciality.Size = new System.Drawing.Size(100, 22);
+            this.txtSpeciality.Size = new System.Drawing.Size(217, 22);
             this.txtSpeciality.TabIndex = 1;
             // 
             // txtGroup
             // 
-            this.txtGroup.Location = new System.Drawing.Point(302, 46);
+            this.txtGroup.Location = new System.Drawing.Point(20, 152);
             this.txtGroup.Name = "txtGroup";
-            this.txtGroup.Size = new System.Drawing.Size(100, 22);
+            this.txtGroup.Size = new System.Drawing.Size(114, 22);
             this.txtGroup.TabIndex = 1;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(20, 91);
+            this.btnAdd.Location = new System.Drawing.Point(88, 206);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(382, 23);
+            this.btnAdd.Size = new System.Drawing.Size(88, 23);
             this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -99,7 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(273, 254);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtGroup);
             this.Controls.Add(this.txtSpeciality);
@@ -107,7 +108,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddStudentForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Пополнение";
             this.ResumeLayout(false);
             this.PerformLayout();
