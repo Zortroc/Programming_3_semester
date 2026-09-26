@@ -27,7 +27,7 @@ namespace WindowView
                 logic.AddStudent(txtName.Text, txtSpeciality.Text, txtGroup.Text);
 
                 MessageBox.Show("Студент добавлен");
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             { 
