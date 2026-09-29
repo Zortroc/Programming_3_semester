@@ -9,13 +9,15 @@ namespace ConsoleView
 {
     internal class Program
     {
-        // создаём один объект Logic, в к-ом хранится список студентов и методы
+        // создаём объект бизнес-логики, в конструкторе Logic уже добавлены три текстовых студента
         static Logic logic = new Logic();
         static void Main(string[] args)
         {
             while (true)
             {
-                // прописываем цикл для менюшки
+                // очищаем экран перед новым меню
+                Console.Clear();
+
                 Console.WriteLine("DecanatPRO");
                 Console.WriteLine("1. Добавить нового студента");
                 Console.WriteLine("2. Удалить студента");
@@ -26,80 +28,200 @@ namespace ConsoleView
                 Console.WriteLine("\nВыберите действие: ");
                 string choice = Console.ReadLine();
 
-                // очищаем консоль, чтобы результат блы на новом экране 
+                // очищаем консоль, чтобы результат был на новом экране 
                 Console.Clear();
 
-                if (choice == "1") //доработать
+                if (choice == "1") 
                 {
-                    break; // все проверки перенесли в логику
+                    Console.WriteLine("Добавление нового студента...\n");
+
+                    Console.Write("Введите ФИО студента: ");
+                    string name = Console.ReadLine();
+
+                    Console.Write("Введите специальность студента: ");
+                    string speciality = Console.ReadLine();
+
+                    Console.Write("Введите группу студента: ");
+                    string group = Console.ReadLine();
+
+                    // проверки находятся в Logic.AddStudent(), поэтому ловим возможную ошибку
+                    try
+                    {
+                        logic.AddStudent(name, speciality, group);
+
+                        Console.WriteLine("\nСтудент успешно добавлен.");
+                    }
+                    catch (Exception error)
+                    {
+                        Console.WriteLine("\n" + error.Message);
+                    }
                 }
 
-                else if (choice == "2") // под вопросом.
+                else if (choice == "2") 
                 {
-                    List<string> tableList = logic.ShowTableList();
+                    // создаём пустой список, Logic заполнит его данными студентов
+                    List<string[]> tableList = new List<string[]>();
+
+                    logic.ShowTableList(tableList);
                     
                     if (tableList.Count == 0)
                     {
-                        Console.WriteLine("удаление невозможно: список студентов пуст.");
+                        Console.WriteLine("Удаление невозможно: список студентов пуст.");
                     }
                     else
                     {
-                        Console.WriteLine("список студентов:\n");
+                        Console.WriteLine("Выберите студента для удаления:\n");
 
+                        Console.WriteLine(
+                            "{0,-4} {1,-30} {2,-30} {3,-15}",
+                            "№",
+                            "ФИО",
+                            "Специальность",
+                            "Группа");
+
+                        Console.WriteLine(
+                            "-------------------------------------------------------------------------------------");
+
+                        // выводим список с номерами
                         for (int i = 0; i < tableList.Count; i++)
                         {
-                            Console.WriteLine($"{i + 1}. {tableList[i]}");
+                            Console.WriteLine(
+                                "{0,-4} {1,-30} {2,-30} {3,-15}",
+                                i + 1,
+                                tableList[i][0],
+                                tableList[i][1],
+                                tableList[i][2]);
                         }
 
                         int studentNumber;
 
+                        // пока пользователь не введёт корректный номер - запрашиваем повторно
                         while (true)
                         {
-                            Console.Write("\nвведите номер студента для удаления: ");
+                            Console.Write("\nВведите номер студента для удаления: ");
 
                             string input = Console.ReadLine();
 
-                            if (!int.TryParse(input, out studentNumber) || studentNumber < 1 || studentNumber > tableList.Count)
+                            if (!int.TryParse(input, out studentNumber))
                             {
-                                Console.WriteLine("ошибка: введите номер студента из списка.");
+                                Console.WriteLine("Ошибка: введите число");
                                 continue;
                             }
+
+                            if (studentNumber < 1 || studentNumber > tableList.Count)
+                            {
+                                Console.WriteLine("Ошибка: такого номера нет в списке");
+                                continue;
+                            }
+
                             break;
                         }
-                        logic.DeleteStudent(studentNumber);
 
-                        Console.WriteLine("студент удален.");
+                        // номер пользователя начинается с 1, индекс списка начинается с 0
+                        string[] selectedStudent = tableList[studentNumber - 1];
+
+                        try
+                        {
+                            // передаём данные выбранного студента в BusinessLogic
+                            logic.DeleteStudent(
+                                selectedStudent[0], 
+                                selectedStudent[1], 
+                                selectedStudent[2]);
+
+                            Console.WriteLine("\nСтудент успешно удалён.");
+                        }
+
+                        catch (Exception error)
+                        {
+                            Console.WriteLine("\n" + error.Message);
+                        }
                     }
                 }
 
                 else if (choice == "3")
                 {
-                    Console.WriteLine("Список всех студентов в таблице:");
-                    foreach (string list in logic.ShowTableList())
+                    List<string[]> tableList = new List<string[]>();    
+
+                    logic.ShowTableList(tableList);
+
+                    Console.WriteLine("Список всех студентов...\n");
+
+                    if (tableList.Count == 0)
                     {
-                        Console.WriteLine(list);
+                        Console.WriteLine("Список студентов пуст.");
+                    }
+                    else
+                    {
+                        Console.WriteLine(
+                            "{0,-4} {1,-30} {2,-30} {3,-15}",
+                            "№",
+                            "ФИО",
+                            "Специальность",
+                            "Группа");
+
+                        Console.WriteLine(
+                            "-------------------------------------------------------------------------------------");
+
+                        for (int i = 0; i < tableList.Count; i++)
+                        {
+                            Console.WriteLine(
+                                "{0, -4} {1, -30} {2, -30} {3, -15}",
+                                i + 1,
+                                tableList[i][0],
+                                tableList[i][1],
+                                tableList[i][2]);
+                        }
                     }
                 }
 
                 else if (choice == "4")
                 {
-                    Console.WriteLine("Гистограмма");
-                    foreach (string list in logic.ShowHistogram())
+                    // x - названия специальностей
+                    List<string> specialities = new List<string>();
+
+                    // y - количество студентов для соответствующей специальности
+                    List<int> counts = new List<int>();
+
+                    // Logic заполняет оба списка
+                    logic.ShowHistogram(
+                        specialities,
+                        counts);
+
+                    Console.WriteLine("Распределение студентов по специальностям...\n");
+
+                    if (specialities.Count == 0)
                     {
-                        Console.WriteLine(list);
+                        Console.WriteLine("Невозможно построить гистограмму, список студентов пуст.");
+                    }
+                    else
+                    {
+                        for (int i = 0; i < specialities.Count; i++)
+                        {
+                            // создаём строку из звёздочек, если count = 3, получится "***"
+                            string stars = new string('*', counts[i]);
+
+                            Console.WriteLine(
+                                specialities[i] + 
+                                ": " + 
+                                stars + 
+                                " " + 
+                                counts[i]);
+                        }
                     }
                 }
+
                 else if (choice == "0")
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Выберите один из предложенных пунктов!");
+                    Console.WriteLine("Ошибка! Выберите один из предложенных пунктов.");
                 }
 
                 // после выполнения действия прога не сразу вернется в меню, поэтому требуем инпута от пользователя
                 Console.WriteLine("\nНажмите любую клавишу...");
+
                 Console.ReadKey();
             }
         }
