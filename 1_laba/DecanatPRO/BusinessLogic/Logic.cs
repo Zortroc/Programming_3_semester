@@ -24,7 +24,7 @@ namespace BusinessLogic
         public void AddStudent(string name, string speciality, string group)
         {
             string[] values = { name, speciality, group };
-            string[] fieldNames = { "ФИО", "направление", "группа" };
+            string[] fieldNames = { "ФИО", "Направление", "Группа" };
 
             for (int i = 0; i < values.Length; i++)
             {
@@ -48,7 +48,7 @@ namespace BusinessLogic
                     }
                 }
 
-                if (fieldNames[i] != "группа")
+                if (fieldNames[i] != "Группа")
                 {
                     foreach (char s in values[i])
                     {
@@ -75,7 +75,7 @@ namespace BusinessLogic
 
                     if (values[i].Contains("--"))
                     {
-                        throw new Exception("Ошибка: группа не может содержать два дефиса подряд.");
+                        throw new Exception("Ошибка: группа не может содержать два и более дефиса подряд.");
                     }
                 }
             }

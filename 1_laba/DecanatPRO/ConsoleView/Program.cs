@@ -67,7 +67,7 @@ namespace ConsoleView
                     }
                     else
                     {
-                        Console.WriteLine("Выберите студента для удаления (0 - отмена):\n");
+                        Console.WriteLine("Список студентов для удаления...\n");
 
                         PrintStudentsTable(tableList);
 
@@ -76,7 +76,7 @@ namespace ConsoleView
                         // пока пользователь не введёт корректный номер - запрашиваем повторно
                         while (true)
                         {
-                            Console.Write("\nВведите номер студента для удаления: ");
+                            Console.Write("\nВведите номер студента для удаления (0 - отмена): ");
 
                             string input = Console.ReadLine();
 
