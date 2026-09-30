@@ -46,6 +46,32 @@ namespace BusinessLogic
                     {
                         throw new Exception("ФИО должно содержать фамилию, имя и отчество.");
                     }
+
+                    string[] nameParts = values[i].Split(' ');
+
+                    foreach (string part in nameParts)
+                    {
+                        if (!char.IsUpper(part[0]))
+                        {
+                            throw new Exception("Фамилия, имя и отчество должны начинаться с заглавной буквы.");
+                        }
+                    }
+                }
+
+                if (fieldNames[i] == "Направление")
+                {
+                    if (!char.IsUpper(values[i][0]))
+                    {
+                        throw new Exception("Направление должно начинаться с заглавной буквы.");
+                    }
+
+                    for (int j = 1; j < values[i].Length; j++)
+                    {
+                        if (char.IsLetter(values[i][j]) && !char.IsLower(values[i][j]))
+                        {
+                            throw new Exception("В направлении заглавной должна быть только первая буква.");
+                        }
+                    }
                 }
 
                 if (fieldNames[i] != "Группа")

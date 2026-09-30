@@ -88,7 +88,7 @@ namespace ConsoleView
 
                             if (!int.TryParse(input, out studentNumber))
                             {
-                                Console.WriteLine("Ошибка: введите число");
+                                Console.WriteLine("Ошибка: введите число.");
                                 continue;
                             }
 
@@ -99,7 +99,7 @@ namespace ConsoleView
 
                             if (studentNumber < 1 || studentNumber > tableList.Count)
                             {
-                                Console.WriteLine("Ошибка: такого номера нет в списке");
+                                Console.WriteLine("Ошибка: такого номера нет в списке.");
                                 continue;
                             }
 
