@@ -70,7 +70,7 @@ namespace ConsoleView
                     }
                     else
                     {
-                        Console.WriteLine("Выберите студента для удаления:\n");
+                        Console.WriteLine("Выберите студента для удаления (0 - отмена):\n");
 
                         Console.WriteLine(
                             "{0,-4} {1,-30} {2,-30} {3,-15}",
@@ -78,9 +78,6 @@ namespace ConsoleView
                             "ФИО",
                             "Специальность",
                             "Группа");
-
-                        Console.WriteLine(
-                            "-------------------------------------------------------------------------------------");
 
                         // выводим список с номерами
                         for (int i = 0; i < tableList.Count; i++)
@@ -102,10 +99,21 @@ namespace ConsoleView
 
                             string input = Console.ReadLine();
 
+                            if (input == null)
+                            {
+                                // ввод завершился: не продолжаем бесконечно запрашивать номер
+                                return;
+                            }
+
                             if (!int.TryParse(input, out studentNumber))
                             {
                                 Console.WriteLine("Ошибка: введите число");
                                 continue;
+                            }
+
+                            if (studentNumber == 0)
+                            {
+                                break;
                             }
 
                             if (studentNumber < 1 || studentNumber > tableList.Count)
@@ -117,23 +125,26 @@ namespace ConsoleView
                             break;
                         }
 
-                        // номер пользователя начинается с 1, индекс списка начинается с 0
-                        string[] selectedStudent = tableList[studentNumber - 1];
-
-                        try
+                        if (studentNumber != 0)
                         {
-                            // передаём данные выбранного студента в BusinessLogic
-                            logic.DeleteStudent(
-                                selectedStudent[0], 
-                                selectedStudent[1], 
-                                selectedStudent[2]);
+                            // номер пользователя начинается с 1, индекс списка начинается с 0
+                            string[] selectedStudent = tableList[studentNumber - 1];
 
-                            Console.WriteLine("\nСтудент успешно удалён.");
-                        }
+                            try
+                            {
+                                // передаём данные выбранного студента в BusinessLogic
+                                logic.DeleteStudent(
+                                    selectedStudent[0],
+                                    selectedStudent[1],
+                                    selectedStudent[2]);
 
-                        catch (Exception error)
-                        {
-                            Console.WriteLine("\n" + error.Message);
+                                Console.WriteLine("\nСтудент успешно удалён.");
+                            }
+
+                            catch (Exception error)
+                            {
+                                Console.WriteLine("\n" + error.Message);
+                            }
                         }
                     }
                 }
@@ -158,9 +169,6 @@ namespace ConsoleView
                             "ФИО",
                             "Специальность",
                             "Группа");
-
-                        Console.WriteLine(
-                            "-------------------------------------------------------------------------------------");
 
                         for (int i = 0; i < tableList.Count; i++)
                         {
