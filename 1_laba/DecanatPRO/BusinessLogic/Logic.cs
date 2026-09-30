@@ -37,39 +37,46 @@ namespace BusinessLogic
 
                 if (string.IsNullOrWhiteSpace(values[i]))
                 {
-                    throw new Exception($"ошибка: {fieldNames[i]} не может быть пустым.");
+                    throw new Exception($"Ошибка: {fieldNames[i]} не может быть пустым.");
                 }
 
                 if (fieldNames[i] == "ФИО")
                 {
                     if (values[i].Count(space => space == ' ') != 2)
-                        throw new Exception ("ФИО должно содержать фамилию, имя и отчество.");
+                    {
+                        throw new Exception("ФИО должно содержать фамилию, имя и отчество.");
+                    }
                 }
 
                 if (fieldNames[i] != "группа")
                 {
                     foreach (char s in values[i])
                     {
-                        if (!char.IsLetter(s) && 
-                            s != ' ')
-                            throw new Exception($"ошибка: {fieldNames[i]} может содержать только буквы и пробелы.");
+                        if (!char.IsLetter(s) && s != ' ')
+                        {
+                            throw new Exception($"Ошибка: {fieldNames[i]} может содержать только буквы и пробелы.");
+                        }
                     }
                 }
                 else
                 {
                     foreach (char s in values[i])
                     {
-                        if (!char.IsLetterOrDigit(s) &&
-                            s != '-')
-                            throw new Exception("ошибка: группа может содержать только буквы, цифры и дефис.");
+                        if (!char.IsLetterOrDigit(s) && s != '-')
+                        {
+                            throw new Exception("Ошибка: группа может содержать только буквы, цифры и дефис.");
+                        }
                     }
 
-                    if (values[i].StartsWith("-") ||
-                        values[i].EndsWith("-"))
-                        throw new Exception("ошибка: группа не может начинаться или заканчиваться дефисом.");
+                    if (values[i].StartsWith("-") || values[i].EndsWith("-"))
+                    {
+                        throw new Exception("Ошибка: группа не может начинаться или заканчиваться дефисом.");
+                    }
 
                     if (values[i].Contains("--"))
-                        throw new Exception("ошибка: группа не может содержать два дефиса подряд.");
+                    {
+                        throw new Exception("Ошибка: группа не может содержать два дефиса подряд.");
+                    }
                 }
             }
 
@@ -79,11 +86,16 @@ namespace BusinessLogic
                     student.Speciality == values[1] &&
                     student.Group == values[2])
                 {
-                    throw new Exception("ошибка: такой студент уже существует.");
+                    throw new Exception("Ошибка: такой студент уже существует.");
                 }
             }
 
-            students.Add(new Student { Name = values[0], Speciality = values[1], Group = values[2]});
+            students.Add(new Student 
+            { 
+                Name = values[0], 
+                Speciality = values[1], 
+                Group = values[2]
+            });
         }
 
         public void DeleteStudent(string name, string speciality, string group)
@@ -99,14 +111,19 @@ namespace BusinessLogic
                 }
             }
 
-            throw new Exception("студент не найден.");
+            throw new Exception("Студент не найден.");
         }
 
         public void ShowTableList(List<string[]> studentsList)
         {
             foreach (Student student in students)
             {
-                studentsList.Add(new string[]{student.Name, student.Speciality, student.Group});
+                studentsList.Add(new string[]
+                {
+                    student.Name, 
+                    student.Speciality, 
+                    student.Group
+                });
             }
         }
 

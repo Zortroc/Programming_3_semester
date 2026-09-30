@@ -210,11 +210,11 @@ namespace ConsoleView
             for (int i = 0; i < tableList.Count; i++)
             {
                 Console.WriteLine(
-                                "{0,-4} {1,-30} {2,-30} {3,-15}",
-                                i + 1,
-                                tableList[i][0],
-                                tableList[i][1],
-                                tableList[i][2]);
+                    "{0,-4} {1,-30} {2,-30} {3,-15}",
+                    i + 1,
+                    tableList[i][0],
+                    tableList[i][1],
+                    tableList[i][2]);
             }
         }
     }
