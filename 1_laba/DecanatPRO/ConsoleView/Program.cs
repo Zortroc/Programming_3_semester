@@ -201,7 +201,7 @@ namespace ConsoleView
         private static void PrintStudentsTable(List<string[]> tableList) // это не второй метод бизнес-логики, этот лишь печатает уже полученные от Logic строки и нужен для читаемости кода
         {
             Console.WriteLine(
-                "{0,-4} {1,-30} {2,-30} {3,-15}", 
+                "{0,-4} {1,-35} {2,-30} {3,-15}", 
                 "№", 
                 "ФИО", 
                 "Специальность", 
@@ -210,7 +210,7 @@ namespace ConsoleView
             for (int i = 0; i < tableList.Count; i++)
             {
                 Console.WriteLine(
-                    "{0,-4} {1,-30} {2,-30} {3,-15}",
+                    "{0,-4} {1,-35} {2,-30} {3,-15}",
                     i + 1,
                     tableList[i][0],
                     tableList[i][1],
