@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BusinessLogic;
 
 namespace ConsoleView
 {
     internal class Program
     {
-        // создаём объект бизнес-логики, в конструкторе Logic уже добавлены три текстовых студента
-        static Logic logic = new Logic();
+        // создаём объект бизнес-логики, в конструкторе Logic уже добавлены три тестовых студента
+        private static Logic logic = new Logic();
         static void Main(string[] args)
         {
+
             while (true)
             {
                 // очищаем экран перед новым меню
@@ -25,7 +23,7 @@ namespace ConsoleView
                 Console.WriteLine("4. Вывести гистограмму: распределение студентов по специальностям");
                 Console.WriteLine("0. Выход");
 
-                Console.WriteLine("\nВыберите действие: ");
+                Console.Write("\nВыберите действие: ");
                 string choice = Console.ReadLine();
 
                 // очищаем консоль, чтобы результат был на новом экране 
@@ -59,7 +57,6 @@ namespace ConsoleView
 
                 else if (choice == "2") 
                 {
-                    // создаём пустой список, Logic заполнит его данными студентов
                     List<string[]> tableList = new List<string[]>();
 
                     logic.ShowTableList(tableList);
@@ -72,23 +69,7 @@ namespace ConsoleView
                     {
                         Console.WriteLine("Выберите студента для удаления (0 - отмена):\n");
 
-                        Console.WriteLine(
-                            "{0,-4} {1,-30} {2,-30} {3,-15}",
-                            "№",
-                            "ФИО",
-                            "Специальность",
-                            "Группа");
-
-                        // выводим список с номерами
-                        for (int i = 0; i < tableList.Count; i++)
-                        {
-                            Console.WriteLine(
-                                "{0,-4} {1,-30} {2,-30} {3,-15}",
-                                i + 1,
-                                tableList[i][0],
-                                tableList[i][1],
-                                tableList[i][2]);
-                        }
+                        PrintStudentsTable(tableList);
 
                         int studentNumber;
 
@@ -163,22 +144,7 @@ namespace ConsoleView
                     }
                     else
                     {
-                        Console.WriteLine(
-                            "{0,-4} {1,-30} {2,-30} {3,-15}",
-                            "№",
-                            "ФИО",
-                            "Специальность",
-                            "Группа");
-
-                        for (int i = 0; i < tableList.Count; i++)
-                        {
-                            Console.WriteLine(
-                                "{0, -4} {1, -30} {2, -30} {3, -15}",
-                                i + 1,
-                                tableList[i][0],
-                                tableList[i][1],
-                                tableList[i][2]);
-                        }
+                        PrintStudentsTable(tableList);     
                     }
                 }
 
@@ -191,9 +157,7 @@ namespace ConsoleView
                     List<int> counts = new List<int>();
 
                     // Logic заполняет оба списка
-                    logic.ShowHistogram(
-                        specialities,
-                        counts);
+                    logic.ShowHistogram(specialities, counts);
 
                     Console.WriteLine("Распределение студентов по специальностям...\n");
 
@@ -224,13 +188,33 @@ namespace ConsoleView
                 }
                 else
                 {
-                    Console.WriteLine("Ошибка! Выберите один из предложенных пунктов.");
+                    Console.WriteLine("Ошибка: выберите один из предложенных пунктов.");
                 }
 
                 // после выполнения действия прога не сразу вернется в меню, поэтому требуем инпута от пользователя
                 Console.WriteLine("\nНажмите любую клавишу...");
 
                 Console.ReadKey();
+            }
+        }
+
+        private static void PrintStudentsTable(List<string[]> tableList) // это не второй метод бизнес-логики, этот лишь печатает уже полученные от Logic строки и нужен для читаемости кода
+        {
+            Console.WriteLine(
+                "{0,-4} {1,-30} {2,-30} {3,-15}", 
+                "№", 
+                "ФИО", 
+                "Специальность", 
+                "Группа");
+
+            for (int i = 0; i < tableList.Count; i++)
+            {
+                Console.WriteLine(
+                                "{0,-4} {1,-30} {2,-30} {3,-15}",
+                                i + 1,
+                                tableList[i][0],
+                                tableList[i][1],
+                                tableList[i][2]);
             }
         }
     }
