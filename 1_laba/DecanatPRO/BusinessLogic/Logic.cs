@@ -17,8 +17,9 @@ namespace BusinessLogic
         public Logic()
         {
             AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
+            AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
             AddStudent("Петров Петр Леонидович", "Программная инженерия", "ПИ25-01");
-            AddStudent("О Степан Дебилович", "Лечебное дело", "ЛД26-01Б");
+            AddStudent("О Степан Сталинович", "Лечебное дело", "ЛД26-01Б");
         }
 
         public void AddStudent(string name, string speciality, string group)
@@ -42,18 +43,13 @@ namespace BusinessLogic
 
                 if (fieldNames[i] == "ФИО")
                 {
-                    if (values[i].Count(space => space == ' ') != 2)
-                    {
-                        throw new Exception("ФИО должно содержать фамилию, имя и отчество.");
-                    }
-
                     string[] nameParts = values[i].Split(' ');
 
                     foreach (string part in nameParts)
                     {
                         if (!char.IsUpper(part[0]))
                         {
-                            throw new Exception("Фамилия, имя и отчество должны начинаться с заглавной буквы.");
+                            throw new Exception("ФИО должны начинаться с заглавной буквы.");
                         }
                     }
                 }
@@ -63,14 +59,6 @@ namespace BusinessLogic
                     if (!char.IsUpper(values[i][0]))
                     {
                         throw new Exception("Направление должно начинаться с заглавной буквы.");
-                    }
-
-                    for (int j = 1; j < values[i].Length; j++)
-                    {
-                        if (char.IsLetter(values[i][j]) && !char.IsLower(values[i][j]))
-                        {
-                            throw new Exception("В направлении заглавной должна быть только первая буква.");
-                        }
                     }
                 }
 
@@ -103,16 +91,6 @@ namespace BusinessLogic
                     {
                         throw new Exception("Ошибка: группа не может содержать два и более дефиса подряд.");
                     }
-                }
-            }
-
-            foreach (Student student in students)
-            {
-                if (student.Name == values[0] &&
-                    student.Speciality == values[1] &&
-                    student.Group == values[2])
-                {
-                    throw new Exception("Ошибка: такой студент уже существует.");
                 }
             }
 
