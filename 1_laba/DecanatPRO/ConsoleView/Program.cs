@@ -28,8 +28,6 @@ namespace ConsoleView
 
                 if (choice == "1") 
                 {
-                    Console.WriteLine("Добавление нового студента...\n");
-
                     Console.Write("Введите ФИО студента: ");
                     string name = Console.ReadLine();
 
@@ -58,7 +56,7 @@ namespace ConsoleView
 
                     if (studentList.Count == 0) 
                     {
-                        Console.WriteLine("Пусто");
+                        Console.WriteLine("Пусто.");
                     }
                     else 
                     {
@@ -73,7 +71,7 @@ namespace ConsoleView
                             try
                             {
                                 logic.DeleteStudent(studentNumber);
-                                Console.WriteLine("Студент удален");
+                                Console.WriteLine("Студент удален.");
                             }
                             catch (Exception error)
                             {
@@ -82,7 +80,7 @@ namespace ConsoleView
                         }
                         else
                         {
-                            Console.WriteLine("Некорректное число");
+                            Console.WriteLine("Некорректное число.");
                         }
                     }
                      
@@ -93,8 +91,6 @@ namespace ConsoleView
                     List<string[]> tableList = new List<string[]>();    
 
                     logic.ShowTableList(tableList);
-
-                    Console.WriteLine("Список всех студентов...\n");
 
                     if (tableList.Count == 0)
                     {
@@ -115,8 +111,6 @@ namespace ConsoleView
 
                     List<int> counts = new List<int>();
                     logic.ShowHistogram(specialities, counts);
-
-                    Console.WriteLine("Распределение студентов по специальностям...\n");
 
                     if (specialities.Count == 0)
                     {

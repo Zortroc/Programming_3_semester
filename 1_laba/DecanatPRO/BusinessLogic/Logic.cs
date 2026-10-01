@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Model;
 
 namespace BusinessLogic
@@ -41,11 +40,16 @@ namespace BusinessLogic
                 {
                     string[] nameParts = values[i].Split(' ');
 
+                    if (nameParts.Length < 2 || nameParts.Length > 3)
+                    {
+                        throw new Exception("ФИО должно содержать фамилию и имя. Отчество необязательно.");
+                    }
+
                     foreach (string part in nameParts)
                     {
                         if (!char.IsUpper(part[0]))
                         {
-                            throw new Exception("ФИО должны начинаться с заглавной буквы.");
+                            throw new Exception("Фамилия, имя и отчество при наличии с заглавной буквы.");
                         }
                     }
                 }
@@ -122,7 +126,6 @@ namespace BusinessLogic
                 });
             }
         }
-
 
         public void ShowHistogram(List<string> x, List<int> y)
         {
