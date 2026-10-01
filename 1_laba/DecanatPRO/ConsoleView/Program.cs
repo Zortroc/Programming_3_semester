@@ -6,14 +6,12 @@ namespace ConsoleView
 {
     internal class Program
     {
-        // создаём объект бизнес-логики, в конструкторе Logic уже добавлены три тестовых студента
         private static Logic logic = new Logic();
         static void Main(string[] args)
         {
 
             while (true)
             {
-                // очищаем экран перед новым меню
                 Console.Clear();
 
                 Console.WriteLine("DecanatPRO");
@@ -26,7 +24,6 @@ namespace ConsoleView
                 Console.Write("\nВыберите действие: ");
                 string choice = Console.ReadLine();
 
-                // очищаем консоль, чтобы результат был на новом экране 
                 Console.Clear();
 
                 if (choice == "1") 

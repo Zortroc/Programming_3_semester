@@ -41,11 +41,8 @@ namespace WindowView
 
             int i = dgvStudents.CurrentRow.Index;
             try
-            {
-                // 3. Передаем порядковый номер (i + 1), так как DeleteStudent внутри делает index = studentNumber - 1
+            { 
                 logic.DeleteStudent(i + 1);
-
-                // 4. Обновляем таблицу на форме
                 RefreshTable();
 
                 MessageBox.Show("Студент успешно удален.");

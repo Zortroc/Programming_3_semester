@@ -5,10 +5,6 @@ using Model;
 
 namespace BusinessLogic
 {
-    /// <summary>
-    /// Готовый класс Logic, который содержит методы для работы со студентами.
-    /// В случае изменения логики, нужно согласовать!
-    /// </summary>
     
     public class Logic
     {
