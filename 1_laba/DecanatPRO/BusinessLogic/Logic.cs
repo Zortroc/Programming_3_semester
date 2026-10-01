@@ -18,7 +18,7 @@ namespace BusinessLogic
         {
             AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
             AddStudent("Петров Петр Леонидович", "Программная инженерия", "ПИ25-01");
-            AddStudent("О Степан Дебилович", "Лечебное дело", "ЛД26-01Б");
+            AddStudent("О Степан Сталинович", "Лечебное дело", "ЛД26-01Б");
         }
 
         public void AddStudent(string name, string speciality, string group)

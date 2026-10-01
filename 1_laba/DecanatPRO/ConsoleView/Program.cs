@@ -6,14 +6,14 @@ namespace ConsoleView
 {
     internal class Program
     {
-        // создаём объект бизнес-логики, в конструкторе Logic уже добавлены три тестовых студента
+        
         private static Logic logic = new Logic();
         static void Main(string[] args)
         {
 
             while (true)
             {
-                // очищаем экран перед новым меню
+                
                 Console.Clear();
 
                 Console.WriteLine("DecanatPRO");
@@ -26,7 +26,7 @@ namespace ConsoleView
                 Console.Write("\nВыберите действие: ");
                 string choice = Console.ReadLine();
 
-                // очищаем консоль, чтобы результат был на новом экране 
+                 
                 Console.Clear();
 
                 if (choice == "1") 
@@ -42,7 +42,7 @@ namespace ConsoleView
                     Console.Write("Введите группу студента: ");
                     string group = Console.ReadLine();
 
-                    // проверки находятся в Logic.AddStudent(), поэтому ловим возможную ошибку
+                    
                     try
                     {
                         logic.AddStudent(name, speciality, group);
@@ -73,7 +73,7 @@ namespace ConsoleView
 
                         int studentNumber;
 
-                        // пока пользователь не введёт корректный номер - запрашиваем повторно
+                        
                         while (true)
                         {
                             Console.Write("\nВведите номер студента для удаления (0 - отмена): ");
@@ -82,7 +82,7 @@ namespace ConsoleView
 
                             if (input == null)
                             {
-                                // ввод завершился: не продолжаем бесконечно запрашивать номер
+                                
                                 return;
                             }
 
@@ -108,12 +108,12 @@ namespace ConsoleView
 
                         if (studentNumber != 0)
                         {
-                            // номер пользователя начинается с 1, индекс списка начинается с 0
+                            
                             string[] selectedStudent = tableList[studentNumber - 1];
 
                             try
                             {
-                                // передаём данные выбранного студента в BusinessLogic
+                                
                                 logic.DeleteStudent(
                                     selectedStudent[0],
                                     selectedStudent[1],
@@ -150,13 +150,13 @@ namespace ConsoleView
 
                 else if (choice == "4")
                 {
-                    // x - названия специальностей
+                    
                     List<string> specialities = new List<string>();
 
-                    // y - количество студентов для соответствующей специальности
+                    
                     List<int> counts = new List<int>();
 
-                    // Logic заполняет оба списка
+                    
                     logic.ShowHistogram(specialities, counts);
 
                     Console.WriteLine("Распределение студентов по специальностям...\n");
@@ -169,7 +169,7 @@ namespace ConsoleView
                     {
                         for (int i = 0; i < specialities.Count; i++)
                         {
-                            // создаём строку из звёздочек, если count = 3, получится "***"
+                            
                             string stars = new string('*', counts[i]);
 
                             Console.WriteLine(
@@ -191,14 +191,14 @@ namespace ConsoleView
                     Console.WriteLine("Ошибка: выберите один из предложенных пунктов.");
                 }
 
-                // после выполнения действия прога не сразу вернется в меню, поэтому требуем инпута от пользователя
+                
                 Console.WriteLine("\nНажмите любую клавишу...");
 
                 Console.ReadKey();
             }
         }
 
-        private static void PrintStudentsTable(List<string[]> tableList) // это не второй метод бизнес-логики, этот лишь печатает уже полученные от Logic строки и нужен для читаемости кода
+        private static void PrintStudentsTable(List<string[]> tableList)
         {
             Console.WriteLine(
                 "{0,-4} {1,-35} {2,-30} {3,-15}", 
