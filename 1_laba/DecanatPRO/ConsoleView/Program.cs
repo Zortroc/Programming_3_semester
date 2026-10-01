@@ -46,7 +46,7 @@ namespace ConsoleView
                     try
                     {
                         logic.AddStudent(name, speciality, group);
-
+                        
                         Console.WriteLine("\nСтудент успешно добавлен.");
                     }
                     catch (Exception error)
@@ -57,77 +57,39 @@ namespace ConsoleView
 
                 else if (choice == "2") 
                 {
-                    List<string[]> tableList = new List<string[]>();
+                    List<string[]> studentList = new List<string[]>();
+                    logic.ShowTableList(studentList);
 
-                    logic.ShowTableList(tableList);
-                    
-                    if (tableList.Count == 0)
+                    if (studentList.Count == 0) 
                     {
-                        Console.WriteLine("Удаление невозможно: список студентов пуст.");
+                        Console.WriteLine("Пусто");
                     }
-                    else
+                    else 
                     {
-                        Console.WriteLine("Список студентов для удаления...\n");
-
-                        PrintStudentsTable(tableList);
-
-                        int studentNumber;
-
-                        // пока пользователь не введёт корректный номер - запрашиваем повторно
-                        while (true)
+                        for (int i = 0; i < studentList.Count; i++)
                         {
-                            Console.Write("\nВведите номер студента для удаления (0 - отмена): ");
-
-                            string input = Console.ReadLine();
-
-                            if (input == null)
-                            {
-                                // ввод завершился: не продолжаем бесконечно запрашивать номер
-                                return;
-                            }
-
-                            if (!int.TryParse(input, out studentNumber))
-                            {
-                                Console.WriteLine("Ошибка: введите число.");
-                                continue;
-                            }
-
-                            if (studentNumber == 0)
-                            {
-                                break;
-                            }
-
-                            if (studentNumber < 1 || studentNumber > tableList.Count)
-                            {
-                                Console.WriteLine("Ошибка: такого номера нет в списке.");
-                                continue;
-                            }
-
-                            break;
+                            Console.WriteLine($"{i+1}. {studentList[i][0]} {studentList[i][1]} {studentList[i][2]}");
                         }
+                        Console.Write("Введите номер студента для удаления: ");
 
-                        if (studentNumber != 0)
+                        if (int.TryParse(Console.ReadLine(), out int studentNumber))
                         {
-                            // номер пользователя начинается с 1, индекс списка начинается с 0
-                            string[] selectedStudent = tableList[studentNumber - 1];
-
                             try
                             {
-                                // передаём данные выбранного студента в BusinessLogic
-                                logic.DeleteStudent(
-                                    selectedStudent[0],
-                                    selectedStudent[1],
-                                    selectedStudent[2]);
-
-                                Console.WriteLine("\nСтудент успешно удалён.");
+                                logic.DeleteStudent(studentNumber);
+                                Console.WriteLine("Студент удален");
                             }
-
                             catch (Exception error)
                             {
                                 Console.WriteLine("\n" + error.Message);
                             }
                         }
+                        else
+                        {
+                            Console.WriteLine("Некорректное число");
+                        }
                     }
+                     
                 }
 
                 else if (choice == "3")
@@ -144,7 +106,10 @@ namespace ConsoleView
                     }
                     else
                     {
-                        PrintStudentsTable(tableList);     
+                        for (int i = 0; i < tableList.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}. {tableList[i][0]}  {tableList[i][1]}  {tableList[i][2]}");
+                        }
                     }
                 }
 
@@ -198,24 +163,5 @@ namespace ConsoleView
             }
         }
 
-        private static void PrintStudentsTable(List<string[]> tableList) // это не второй метод бизнес-логики, этот лишь печатает уже полученные от Logic строки и нужен для читаемости кода
-        {
-            Console.WriteLine(
-                "{0,-4} {1,-35} {2,-30} {3,-15}", 
-                "#", 
-                "ФИО", 
-                "Специальность", 
-                "Группа");
-
-            for (int i = 0; i < tableList.Count; i++)
-            {
-                Console.WriteLine(
-                    "{0,-4} {1,-35} {2,-30} {3,-15}",
-                    i + 1,
-                    tableList[i][0],
-                    tableList[i][1],
-                    tableList[i][2]);
-            }
-        }
     }
 }

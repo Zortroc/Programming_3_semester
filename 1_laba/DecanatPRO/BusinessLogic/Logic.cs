@@ -102,20 +102,16 @@ namespace BusinessLogic
             });
         }
 
-        public void DeleteStudent(string name, string speciality, string group)
+        public void DeleteStudent(int studentNumber)
         {
-            foreach (Student student in students)
-            {
-                if (student.Name == name &&
-                    student.Speciality == speciality &&
-                    student.Group == group)
-                {
-                    students.Remove(student);
-                    return;
-                }
+            int index = studentNumber - 1;
+            if (index >= 0 &&
+                index < students.Count)
+            { 
+                students.RemoveAt(index);
             }
-
-            throw new Exception("Студент не найден.");
+            else
+                throw new Exception("Неверный номер.");
         }
 
         public void ShowTableList(List<string[]> studentsList)
