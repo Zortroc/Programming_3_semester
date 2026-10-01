@@ -36,31 +36,6 @@ namespace BusinessLogic
                     throw new Exception($"Ошибка: {fieldNames[i]} не может быть пустым.");
                 }
 
-                if (fieldNames[i] == "ФИО")
-                {
-                    string[] nameParts = values[i].Split(' ');
-
-                    if (nameParts.Length < 2 || nameParts.Length > 3)
-                    {
-                        throw new Exception("ФИО должно содержать фамилию и имя. Отчество необязательно.");
-                    }
-
-                    foreach (string part in nameParts)
-                    {
-                        if (!char.IsUpper(part[0]))
-                        {
-                            throw new Exception("Фамилия, имя и отчество при наличии с заглавной буквы.");
-                        }
-                    }
-                }
-
-                if (fieldNames[i] == "Направление")
-                {
-                    if (!char.IsUpper(values[i][0]))
-                    {
-                        throw new Exception("Направление должно начинаться с заглавной буквы.");
-                    }
-                }
 
                 if (fieldNames[i] != "Группа")
                 {
