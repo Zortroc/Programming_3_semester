@@ -42,7 +42,6 @@ namespace ConsoleView
                     Console.Write("Введите группу студента: ");
                     string group = Console.ReadLine();
 
-                    // проверки находятся в Logic.AddStudent(), поэтому ловим возможную ошибку
                     try
                     {
                         logic.AddStudent(name, speciality, group);
@@ -115,13 +114,9 @@ namespace ConsoleView
 
                 else if (choice == "4")
                 {
-                    // x - названия специальностей
                     List<string> specialities = new List<string>();
 
-                    // y - количество студентов для соответствующей специальности
                     List<int> counts = new List<int>();
-
-                    // Logic заполняет оба списка
                     logic.ShowHistogram(specialities, counts);
 
                     Console.WriteLine("Распределение студентов по специальностям...\n");
@@ -134,7 +129,7 @@ namespace ConsoleView
                     {
                         for (int i = 0; i < specialities.Count; i++)
                         {
-                            // создаём строку из звёздочек, если count = 3, получится "***"
+                            
                             string stars = new string('*', counts[i]);
 
                             Console.WriteLine(
@@ -156,7 +151,6 @@ namespace ConsoleView
                     Console.WriteLine("Ошибка: выберите один из предложенных пунктов.");
                 }
 
-                // после выполнения действия прога не сразу вернется в меню, поэтому требуем инпута от пользователя
                 Console.WriteLine("\nНажмите любую клавишу...");
 
                 Console.ReadKey();

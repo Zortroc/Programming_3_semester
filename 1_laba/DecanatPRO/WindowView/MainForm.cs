@@ -40,18 +40,20 @@ namespace WindowView
             }
 
             int i = dgvStudents.CurrentRow.Index;
+            try
+            {
+                // 3. Передаем порядковый номер (i + 1), так как DeleteStudent внутри делает index = studentNumber - 1
+                logic.DeleteStudent(i + 1);
 
-            List<string[]> studentsList = new List<string[]>();
-            logic.ShowTableList(studentsList);
+                // 4. Обновляем таблицу на форме
+                RefreshTable();
 
-            string[] student = studentsList[i];
-
-            string name = student[0];
-            string speciality = student[1];
-            string group = student[2];
-
-            logic.DeleteStudent(name, speciality, group);
-            RefreshTable();
+                MessageBox.Show("Студент успешно удален.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
         private void btnShowHistogram_Click(object sender, EventArgs e)
