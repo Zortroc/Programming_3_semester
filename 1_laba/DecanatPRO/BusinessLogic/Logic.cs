@@ -13,8 +13,9 @@ namespace BusinessLogic
         {
             AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
             AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
-            AddStudent("Петров Петр Леонидович", "Программная инженерия", "ПИ25-01");
+            AddStudent("ffff", "ffff", "ПИ25-01");
             AddStudent("О Степан Сталинович", "Лечебное дело", "ЛД26-01Б");
+            AddStudent("О Степан", "Лечебное дело", "ЛД26-01Б");
         }
 
         public void AddStudent(string name, string speciality, string group)
@@ -26,22 +27,22 @@ namespace BusinessLogic
             {
                 values[i] = (values[i] ?? "").Trim();
 
+                if (values[i] == "")
+                {
+                    throw new Exception($"Ошибка: {fieldNames[i]} не может быть пустым.");
+                }
+
                 while (values[i].Contains("  "))
                 {
                     values[i] = values[i].Replace("  ", " ");
                 }
 
-                if (string.IsNullOrWhiteSpace(values[i]))
-                {
-                    throw new Exception($"Ошибка: {fieldNames[i]} не может быть пустым.");
-                }
-
-
                 if (fieldNames[i] != "Группа")
                 {
                     foreach (char s in values[i])
                     {
-                        if (!char.IsLetter(s) && s != ' ')
+                        if (!char.IsLetter(s) && 
+                            s != ' ')
                         {
                             throw new Exception($"Ошибка: {fieldNames[i]} может содержать только буквы и пробелы.");
                         }
@@ -51,13 +52,15 @@ namespace BusinessLogic
                 {
                     foreach (char s in values[i])
                     {
-                        if (!char.IsLetterOrDigit(s) && s != '-')
+                        if (!char.IsLetterOrDigit(s) && 
+                            s != '-')
                         {
                             throw new Exception("Ошибка: группа может содержать только буквы, цифры и дефис.");
                         }
                     }
 
-                    if (values[i].StartsWith("-") || values[i].EndsWith("-"))
+                    if (values[i].StartsWith("-") || 
+                        values[i].EndsWith("-"))
                     {
                         throw new Exception("Ошибка: группа не может начинаться или заканчиваться дефисом.");
                     }
@@ -82,42 +85,43 @@ namespace BusinessLogic
             int index = studentNumber - 1;
             if (index >= 0 &&
                 index < students.Count)
-            { 
+            {
                 students.RemoveAt(index);
             }
             else
+            { 
                 throw new Exception("Неверный номер.");
+            }    
         }
 
         public void ShowTableList(List<string[]> studentsList)
         {
             foreach (Student student in students)
             {
-                studentsList.Add(new string[]
-                {
-                    student.Name, 
-                    student.Speciality, 
-                    student.Group
-                });
+                studentsList.Add(
+                    new string[]
+                    {
+                        student.Name, 
+                        student.Speciality, 
+                        student.Group
+                    }
+                );
             }
         }
 
-        public void ShowHistogram(List<string> x, List<int> y)
+        public void ShowHistogram(List<string> specialities, List<int> counts)
         {
-            List<string> specialities = x;
-            List<int> counts = y;
 
             foreach (Student student in students)
             {
-                int i = specialities.IndexOf(student.Speciality);
-
-                if (i == -1)
+                if (!specialities.Contains(student.Speciality))
                 {
                     specialities.Add(student.Speciality);
                     counts.Add(1);
                 }
                 else
                 {
+                    int i = specialities.IndexOf(student.Speciality);
                     counts[i]++;
                 }
             }
