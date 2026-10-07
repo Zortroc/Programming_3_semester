@@ -29,11 +29,13 @@ namespace WindowView
 
             for (int i = 0; i < specialities.Count; i++)
             {
-                chart1.Series["Series1"].Points.AddXY(
-                    specialities[i],
-                    counts[i]
-                );
+                chart1.Series["Series1"].Points.AddXY( specialities[i], counts[i]);
             }
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

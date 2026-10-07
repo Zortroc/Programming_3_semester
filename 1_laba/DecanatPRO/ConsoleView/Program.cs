@@ -100,7 +100,7 @@ namespace ConsoleView
                     {
                         for (int i = 0; i < tableList.Count; i++)
                         {
-                            Console.WriteLine($"{i + 1}. {tableList[i][0]}  {tableList[i][1]}  {tableList[i][2]}");
+                            Console.WriteLine($"{i + 1}. {tableList[i][0]} {tableList[i][1]} {tableList[i][2]}");
                         }
                     }
                 }
@@ -108,8 +108,8 @@ namespace ConsoleView
                 else if (choice == "4")
                 {
                     List<string> specialities = new List<string>();
-
                     List<int> counts = new List<int>();
+
                     logic.ShowHistogram(specialities, counts);
 
                     if (specialities.Count == 0)

@@ -13,11 +13,10 @@ namespace WindowView
 {
     public partial class MainForm : Form
     {
-        private Logic logic;
+        private Logic logic = new Logic();
         public MainForm()
         {
             InitializeComponent();
-            logic = new Logic();
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -44,8 +43,6 @@ namespace WindowView
             { 
                 logic.DeleteStudent(i + 1);
                 RefreshTable();
-
-                MessageBox.Show("Студент успешно удален.");
             }
             catch (Exception ex)
             {
