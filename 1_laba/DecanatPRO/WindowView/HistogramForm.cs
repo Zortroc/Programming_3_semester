@@ -22,14 +22,11 @@ namespace WindowView
 
         private void HistogramForm_Load(object sender, EventArgs e)
         {
-            List<string> specialities = new List<string>();
-            List<int> counts = new List<int>();
+            Dictionary<string, int> histogram = logic.ShowHistogram();
 
-            logic.ShowHistogram(specialities, counts);
-
-            for (int i = 0; i < specialities.Count; i++)
+            foreach (KeyValuePair<string, int> res in histogram)
             {
-                chart1.Series["Series1"].Points.AddXY( specialities[i], counts[i]);
+                chart1.Series["Series1"].Points.AddXY(res.Key, res.Value);
             }
         }
 

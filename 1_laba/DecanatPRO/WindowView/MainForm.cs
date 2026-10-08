@@ -64,14 +64,10 @@ namespace WindowView
         private void RefreshTable()
         {
             dgvStudents.Rows.Clear();
-
-            List<string[]> studentsList = new List<string[]>();
-
-            logic.ShowTableList(studentsList);
-
-            foreach (string[] student in studentsList)
+            List <string[]> table = logic.ShowTableList();
+            foreach (string[] field in table)
             {
-                dgvStudents.Rows.Add(student);
+                dgvStudents.Rows.Add(field);
             }
         }
     }

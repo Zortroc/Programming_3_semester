@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using Model;
 
 namespace BusinessLogic
@@ -7,7 +8,7 @@ namespace BusinessLogic
     
     public class Logic
     {
-        private List<Student> students { get; set; } = new List<Student>();
+        private List<Student> students = new List<Student>();
 
         public Logic()
         {
@@ -94,8 +95,10 @@ namespace BusinessLogic
             }    
         }
 
-        public void ShowTableList(List<string[]> studentsList)
+        public List<string[]> ShowTableList()
         {
+            List<string[]> studentsList = new List<string[]>();
+
             foreach (Student student in students)
             {
                 studentsList.Add(
@@ -107,24 +110,26 @@ namespace BusinessLogic
                     }
                 );
             }
+            return studentsList;
         }
 
-        public void ShowHistogram(List<string> specialities, List<int> counts)
+        public Dictionary<string, int> ShowHistogram()
         {
+            Dictionary<string, int> histogram = new Dictionary<string, int>();
 
             foreach (Student student in students)
             {
-                if (!specialities.Contains(student.Speciality))
+                if (!histogram.ContainsKey(student.Speciality))
                 {
-                    specialities.Add(student.Speciality);
-                    counts.Add(1);
+                    histogram.Add(student.Speciality, 1);
                 }
                 else
                 {
-                    int i = specialities.IndexOf(student.Speciality);
-                    counts[i]++;
+                    histogram[student.Speciality]++;
                 }
             }
+
+            return histogram;
         }
     }
 }

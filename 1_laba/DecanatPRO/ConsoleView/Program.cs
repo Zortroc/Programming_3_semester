@@ -26,111 +26,25 @@ namespace ConsoleView
 
                 Console.Clear();
 
-                if (choice == "1") 
+                if (choice == "1")
                 {
-                    Console.Write("Введите ФИО студента: ");
-                    string name = Console.ReadLine();
-
-                    Console.Write("Введите специальность студента: ");
-                    string speciality = Console.ReadLine();
-
-                    Console.Write("Введите группу студента: ");
-                    string group = Console.ReadLine();
-
-                    try
-                    {
-                        logic.AddStudent(name, speciality, group);
-                        
-                        Console.WriteLine("\nСтудент успешно добавлен.");
-                    }
-                    catch (Exception error)
-                    {
-                        Console.WriteLine("\n" + error.Message);
-                    }
+                    AddStudentInput();
                 }
 
-                else if (choice == "2") 
+                else if (choice == "2")
                 {
-                    List<string[]> studentList = new List<string[]>();
-                    logic.ShowTableList(studentList);
+                    DeleteStudentInput();
 
-                    if (studentList.Count == 0) 
-                    {
-                        Console.WriteLine("Пусто.");
-                    }
-                    else 
-                    {
-                        for (int i = 0; i < studentList.Count; i++)
-                        {
-                            Console.WriteLine($"{i+1}. {studentList[i][0]} {studentList[i][1]} {studentList[i][2]}");
-                        }
-                        Console.Write("Введите номер студента для удаления: ");
-
-                        if (int.TryParse(Console.ReadLine(), out int studentNumber))
-                        {
-                            try
-                            {
-                                logic.DeleteStudent(studentNumber);
-                                Console.WriteLine("Студент удален.");
-                            }
-                            catch (Exception error)
-                            {
-                                Console.WriteLine("\n" + error.Message);
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Некорректное число.");
-                        }
-                    }
-                     
                 }
 
                 else if (choice == "3")
                 {
-                    List<string[]> tableList = new List<string[]>();    
-
-                    logic.ShowTableList(tableList);
-
-                    if (tableList.Count == 0)
-                    {
-                        Console.WriteLine("Список студентов пуст.");
-                    }
-                    else
-                    {
-                        for (int i = 0; i < tableList.Count; i++)
-                        {
-                            Console.WriteLine($"{i + 1}. {tableList[i][0]} {tableList[i][1]} {tableList[i][2]}");
-                        }
-                    }
+                    ShowTableInput();
                 }
 
                 else if (choice == "4")
                 {
-                    List<string> specialities = new List<string>();
-                    List<int> counts = new List<int>();
-
-                    logic.ShowHistogram(specialities, counts);
-
-                    if (specialities.Count == 0)
-                    {
-                        Console.WriteLine("Невозможно построить гистограмму, список студентов пуст.");
-                    }
-                    else
-                    {
-                        for (int i = 0; i < specialities.Count; i++)
-                        {
-                            
-                            string stars = new string('*', counts[i]);
-
-                            Console.WriteLine(
-                                specialities[i] + 
-                                ": " + 
-                                stars + 
-                                " " + 
-                                counts[i]);
-                        }
-                    }
+                    HistogramInput();
                 }
 
                 else if (choice == "0")
@@ -148,5 +62,92 @@ namespace ConsoleView
             }
         }
 
+        private static void HistogramInput()
+        {
+            Dictionary<string, int> histogram = logic.ShowHistogram();
+
+            foreach (KeyValuePair<string, int> res in histogram)
+            {
+                Console.Write($"{res.Key} ");
+
+                for (int i = 0; i < res.Value; i++)
+                {
+                    Console.Write($"*");
+                }
+
+                Console.Write($"{res.Value}");
+                Console.WriteLine();
+            }
+        }
+
+        private static void ShowTableInput()
+        {
+            List<string[]> table = logic.ShowTableList();
+
+            int number = 1;
+            foreach (string[] field in table)
+            {
+                Console.WriteLine($"{number}. {field[0]} {field[1]} {field[2]}");
+                number++;
+            }
+        }
+
+        private static void DeleteStudentInput()
+        {
+            List<string[]> table = logic.ShowTableList();
+
+            if (table.Count == 0)
+            {
+                Console.WriteLine("Пусто.");
+            }
+            else
+            {
+                for (int i = 0; i < table.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {table[i][0]} {table[i][1]} {table[i][2]}");
+                }
+                Console.Write("Введите номер студента для удаления: ");
+
+                if (int.TryParse(Console.ReadLine(), out int studentNumber))
+                {
+                    try
+                    {
+                        logic.DeleteStudent(studentNumber);
+                        Console.WriteLine("Студент удален.");
+                    }
+                    catch (Exception error)
+                    {
+                        Console.WriteLine("\n" + error.Message);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Некорректное число.");
+                }
+            }
+        }
+
+        private static void AddStudentInput()
+        {
+            Console.Write("Введите ФИО студента: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Введите специальность студента: ");
+            string speciality = Console.ReadLine();
+
+            Console.Write("Введите группу студента: ");
+            string group = Console.ReadLine();
+
+            try
+            {
+                logic.AddStudent(name, speciality, group);
+
+                Console.WriteLine("\nСтудент успешно добавлен.");
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("\n" + error.Message);
+            }
+        }
     }
 }
