@@ -14,7 +14,7 @@ namespace ConsoleView
             {
                 Console.Clear();
 
-                Console.WriteLine("DecanatPRO");
+                Console.WriteLine("DecanatPRO 2.0");
                 Console.WriteLine("1. Добавить нового студента");
                 Console.WriteLine("2. Удалить студента");
                 Console.WriteLine("3. Вывести весь список в таблицу");
