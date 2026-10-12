@@ -95,22 +95,17 @@ namespace BusinessLogic
             }    
         }
 
-        public List<string[]> ShowTableList()
+        public string[,] ShowTableList()
         {
-            List<string[]> studentsList = new List<string[]>();
-
-            foreach (Student student in students)
+            string[,] table = new string[students.Count, 3];
+            for (int i = 0; i < students.Count; i++)
             {
-                studentsList.Add(
-                    new string[]
-                    {
-                        student.Name, 
-                        student.Speciality, 
-                        student.Group
-                    }
-                );
+                table[i,0] = students[i].Name;
+                table[i,1] = students[i].Speciality;
+                table[i,2] = students[i].Group;
             }
-            return studentsList;
+
+            return table;
         }
 
         public Dictionary<string, int> ShowHistogram()

@@ -82,29 +82,26 @@ namespace ConsoleView
 
         private static void ShowTableInput()
         {
-            List<string[]> table = logic.ShowTableList();
-
-            int number = 1;
-            foreach (string[] field in table)
+            string[,] table = logic.ShowTableList();
+            for (int i = 0; i < table.GetLength(0); i++)
             {
-                Console.WriteLine($"{number}. {field[0]} {field[1]} {field[2]}");
-                number++;
+                Console.WriteLine($"{i + 1}. {table[i, 0]} {table[i, 1]} {table[i, 2]}");
             }
         }
 
         private static void DeleteStudentInput()
         {
-            List<string[]> table = logic.ShowTableList();
+            string[,] table = logic.ShowTableList();
 
-            if (table.Count == 0)
+            if (table.Length == 0)
             {
                 Console.WriteLine("Пусто.");
             }
             else
             {
-                for (int i = 0; i < table.Count; i++)
+                for (int i = 0; i < table.GetLength(0); i++)
                 {
-                    Console.WriteLine($"{i + 1}. {table[i][0]} {table[i][1]} {table[i][2]}");
+                    Console.WriteLine($"{i + 1}. {table[i, 0]} {table[i, 1]} {table[i, 2]}");
                 }
                 Console.Write("Введите номер студента для удаления: ");
 
