@@ -9,34 +9,65 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Реализует операции CRUD для студентов с использованием Entity Framework.
+    /// Обеспечивает добавление, чтение, обновление и удаление студентов в базе данных.
+    /// </summary>
     public class EFRepository : IRepository<Student>
     {
+        /// <summary>
+        /// Контекст Entity Framework, используемый для взаимодействия с базой данных.
+        /// </summary>
         private readonly StudentContext _context;
-
+        /// <summary>
+        /// Инициализирует репозиторий указанным контекстом базы данных.
+        /// </summary>
+        /// <param name="context">Контекст Entity Framework для работы со студентами.</param>
         public EFRepository(StudentContext context)
         {
             _context = context;
         }
+        /// <summary>
+        /// Добавляет нового студента в базу данных и сохраняет изменения.
+        /// </summary>
+        /// <param name="obj">Студент, которого необходимо добавить.</param>
         public void Create(Student obj)
         {
             _context.Set<Student>().Add(obj);
             _context.SaveChanges();
         }
+        /// <summary>
+        /// Получает список всех студентов из базы данных.
+        /// </summary>
+        /// <returns>Список объектов Student.</returns>
         public IEnumerable<Student> ReadAll()
         {
             return _context.Set<Student>().ToList();
         }
+        /// <summary>
+        /// Находит студента в базе данных по его идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор искомого студента.</param>
+        /// <returns>Найденный студент или null, если студент не найден.</returns>
         public Student ReadById(int id)
         {
 
             return _context.Students.Find(id);
 
         }
+        /// <summary>
+        /// Обновляет данные существующего студента в базе данных и сохраняет изменения.
+        /// </summary>
+        /// <param name="obj">Студент с обновлёнными данными.</param>
         public void Update(Student obj)
         {
             _context.Entry(obj).State = EntityState.Modified;
             _context.SaveChanges();
         }
+        /// <summary>
+        /// Удаляет студента из базы данных и сохраняет изменения.
+        /// </summary>
+        /// <param name="obj">Студент, которого необходимо удалить.</param>
         public void Delete(Student obj) 
         {
             _context.Set<Student>().Remove(obj);
