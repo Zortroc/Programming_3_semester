@@ -9,7 +9,7 @@ namespace ConsoleView
         private static Logic logic = new Logic();
         static void Main(string[] args)
         {
-
+           
             while (true)
             {
                 Console.Clear();
@@ -146,5 +146,7 @@ namespace ConsoleView
                 Console.WriteLine("\n" + error.Message);
             }
         }
+
+        
     }
 }

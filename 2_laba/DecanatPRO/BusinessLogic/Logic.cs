@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using Model;
+using DataAccessLayer;
+using System.Linq;
 
 namespace BusinessLogic
 {
     
     public class Logic
     {
-        private List<Student> students = new List<Student>();
+        private readonly IRepository<Student> _repository 
+            = new EFRepository(new StudentContext());
 
-        public Logic()
-        {
-            AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
-            AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
-            AddStudent("ffff", "ffff", "ПИ25-01");
-            AddStudent("О Степан Сталинович", "Лечебное дело", "ЛД26-01Б");
-            AddStudent("О Степан", "Лечебное дело", "ЛД26-01Б");
-        }
+        //public Logic()
+        //{
+        //    AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
+        //    AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
+        //    AddStudent("ffff", "ffff", "ПИ25-01");
+        //    AddStudent("О Степан Сталинович", "Лечебное дело", "ЛД26-01Б");
+        //    AddStudent("О Степан", "Лечебное дело", "ЛД26-01Б");
+        //}
 
         public void AddStudent(string name, string speciality, string group)
         {
@@ -73,7 +76,7 @@ namespace BusinessLogic
                 }
             }
 
-            students.Add(new Student 
+            _repository.Create(new Student 
             { 
                 Name = values[0], 
                 Speciality = values[1], 
@@ -83,11 +86,13 @@ namespace BusinessLogic
 
         public void DeleteStudent(int studentNumber)
         {
+            List<Student> students = _repository.ReadAll().ToList();
+
             int index = studentNumber - 1;
             if (index >= 0 &&
                 index < students.Count)
             {
-                students.RemoveAt(index);
+                _repository.Delete(students[index]);
             }
             else
             { 
@@ -97,6 +102,8 @@ namespace BusinessLogic
 
         public string[,] ShowTableList()
         {
+            List<Student> students = _repository.ReadAll().ToList();
+
             string[,] table = new string[students.Count, 3];
             for (int i = 0; i < students.Count; i++)
             {
@@ -110,6 +117,8 @@ namespace BusinessLogic
 
         public Dictionary<string, int> ShowHistogram()
         {
+            List<Student> students = _repository.ReadAll().ToList();
+
             Dictionary<string, int> histogram = new Dictionary<string, int>();
 
             foreach (Student student in students)
