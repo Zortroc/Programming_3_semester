@@ -4,9 +4,23 @@ using BusinessLogic;
 
 namespace ConsoleView
 {
+    /// <summary>
+    /// Реализует консольное представление приложения DecanatPRO:
+    /// отображает меню и передаёт пользовательские действия
+    /// в слой бизнес-логики.
+    /// </summary>
     internal class Program
     {
+        /// <summary>
+        /// Объект бизнес-логики, используемый для выполнения операций
+        /// со студентами.
+        /// </summary>
         private static Logic logic = new Logic();
+        /// <summary>
+        /// Запускает главный цикл приложения, отображает меню
+        /// и обрабатывает выбранные пользователем команды.
+        /// </summary>
+        /// <param name="args">Аргументы командной строки.</param>
         static void Main(string[] args)
         {
            
@@ -61,7 +75,10 @@ namespace ConsoleView
                 Console.ReadKey();
             }
         }
-
+        /// <summary>
+        /// Выводит гистограмму распределения студентов по специальностям,
+        /// используя данные, полученные из бизнес-логики.
+        /// </summary>
         private static void HistogramInput()
         {
             Dictionary<string, int> histogram = logic.ShowHistogram();
@@ -79,7 +96,10 @@ namespace ConsoleView
                 Console.WriteLine();
             }
         }
-
+        /// <summary>
+        /// Получает список студентов в виде двумерного массива
+        /// и выводит его содержимое в консоль с нумерацией строк.
+        /// </summary>
         private static void ShowTableInput()
         {
             string[,] table = logic.ShowTableList();
@@ -88,7 +108,10 @@ namespace ConsoleView
                 Console.WriteLine($"{i + 1}. {table[i, 0]} {table[i, 1]} {table[i, 2]}");
             }
         }
-
+        /// <summary>
+        /// Выводит список студентов, запрашивает порядковый номер
+        /// для удаления и обрабатывает возможные ошибки ввода.
+        /// </summary>
         private static void DeleteStudentInput()
         {
             string[,] table = logic.ShowTableList();
@@ -123,7 +146,10 @@ namespace ConsoleView
                 }
             }
         }
-
+        /// <summary>
+        /// Запрашивает у пользователя ФИО, направление подготовки и группу,
+        /// передаёт введённые данные в бизнес-логику и выводит результат.
+        /// </summary>
         private static void AddStudentInput()
         {
             Console.Write("Введите ФИО студента: ");
@@ -146,7 +172,5 @@ namespace ConsoleView
                 Console.WriteLine("\n" + error.Message);
             }
         }
-
-        
     }
 }

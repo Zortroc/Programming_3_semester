@@ -7,9 +7,17 @@ using System.Linq;
 
 namespace BusinessLogic
 {
-    
+    /// <summary>
+    /// Содержит основную бизнес-логику приложения DecanatPRO:
+    /// добавление и удаление студентов, получение списка
+    /// и формирование гистограммы распределения по специальностям.
+    /// </summary>
     public class Logic
     {
+        /// <summary>
+        /// Репозиторий для выполнения операций со студентами
+        /// и взаимодействия с хранилищем данных.
+        /// </summary>
         private readonly IRepository<Student> _repository 
             = new EFRepository(new StudentContext());
 
@@ -22,6 +30,16 @@ namespace BusinessLogic
         //    AddStudent("О Степан", "Лечебное дело", "ЛД26-01Б");
         //}
 
+        /// <summary>
+        /// Добавляет нового студента после проверки и нормализации
+        /// введённых ФИО, направления подготовки и названия группы.
+        /// </summary>
+        /// <param name="name">ФИО студента.</param>
+        /// <param name="speciality">Направление подготовки студента.</param>
+        /// <param name="group">Учебная группа студента.</param>
+        /// <exception cref="Exception">
+        /// Возникает, если одно из полей пустое или содержит недопустимые символы.
+        /// </exception>
         public void AddStudent(string name, string speciality, string group)
         {
             string[] values = { name, speciality, group };
@@ -83,7 +101,14 @@ namespace BusinessLogic
                 Group = values[2]
             });
         }
-
+        /// <summary>
+        /// Удаляет студента из хранилища по его порядковому номеру
+        /// в текущем списке студентов.
+        /// </summary>
+        /// <param name="studentNumber">Порядковый номер студента, начиная с единицы.</param>
+        /// <exception cref="Exception">
+        /// Возникает, если указанный номер выходит за пределы списка.
+        /// </exception>
         public void DeleteStudent(int studentNumber)
         {
             List<Student> students = _repository.ReadAll().ToList();
@@ -99,7 +124,14 @@ namespace BusinessLogic
                 throw new Exception("Неверный номер.");
             }    
         }
-
+        /// <summary>
+        /// Формирует двумерный массив со сведениями обо всех студентах
+        /// для последующего отображения в табличном виде.
+        /// </summary>
+        /// <returns>
+        /// Массив, в котором каждая строка содержит ФИО,
+        /// направление подготовки и группу одного студента.
+        /// </returns>
         public string[,] ShowTableList()
         {
             List<Student> students = _repository.ReadAll().ToList();
@@ -114,7 +146,13 @@ namespace BusinessLogic
 
             return table;
         }
-
+        /// <summary>
+        /// Подсчитывает количество студентов по каждому направлению подготовки.
+        /// </summary>
+        /// <returns>
+        /// Словарь, в котором ключом является направление подготовки,
+        /// а значением — количество студентов на этом направлении.
+        /// </returns>
         public Dictionary<string, int> ShowHistogram()
         {
             List<Student> students = _repository.ReadAll().ToList();
