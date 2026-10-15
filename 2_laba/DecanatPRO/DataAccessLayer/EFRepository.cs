@@ -1,11 +1,6 @@
 ﻿using Model;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -55,7 +50,10 @@ namespace DataAccessLayer
             return _context.Students.Find(id);
 
         }
-
+        /// <summary>
+        /// Удаляет студента из базы данных.
+        /// </summary>
+        /// <param name="obj">Удаляемый студент.</param>
         public void Delete(Student obj) 
         {
             _context.Set<Student>().Remove(obj);
