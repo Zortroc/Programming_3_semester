@@ -1,24 +1,35 @@
 ﻿using Dapper;
 using Model;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Реализует CRUD-операции для студентов с помощью Dapper.
+    /// </summary>
     public class DapperRepository : IRepository<Student>
     {
+        /// <summary>
+        /// Строка подключения к базе данных.
+        /// </summary>
         private string connectionString;
 
+        /// <summary>
+        /// Создаёт репозиторий с указанной строкой подключения.
+        /// </summary>
+        /// <param name="connectionString">Строка подключения к базе данных.</param>
         public DapperRepository(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
+        /// <summary>
+        /// Выполняет SQL-команду, не возвращающую результат запроса.
+        /// </summary>
+        /// <param name="script">Текст SQL-команды.</param>
         private void UseScript(string script)
         {
             if(!string.IsNullOrEmpty(script))
@@ -29,13 +40,19 @@ namespace DataAccessLayer
                 }
             }
         }
-
+        /// <summary>
+        /// Добавляет студента в базу данных.
+        /// </summary>
+        /// <param name="student">Добавляемый студент.</param>
         public void Create(Student student)
         {
             string script = "INSERT INTO Students (Name, Speciality, [group]) VALUES (" + student.Name + ", " + student.Speciality + "," + student.Group + ")";
             UseScript(script);
         }
-
+        /// <summary>
+        /// Возвращает всех студентов из базы данных.
+        /// </summary>
+        /// <returns>Список студентов.</returns>
         public IEnumerable<Student> ReadAll()
         {
             List<Student> students;
@@ -45,7 +62,11 @@ namespace DataAccessLayer
             }
             return students;
         }
-
+        /// <summary>
+        /// Находит студента по идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор студента.</param>
+        /// <returns>Найденный студент или null, если его нет.</returns>
         public Student ReadById(int id)
         {
             Student student;
@@ -55,7 +76,10 @@ namespace DataAccessLayer
             }
             return student;
         }
-
+        /// <summary>
+        /// Удаляет студента из базы данных.
+        /// </summary>
+        /// <param name="student">Удаляемый студент.</param>
         public void Delete(Student student) 
         {
             string script = "DELETE FROM Students WHERE Id = " + student.Id;
