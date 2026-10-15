@@ -18,7 +18,8 @@ namespace BusinessLogic
         /// Репозиторий для выполнения операций со студентами
         /// и взаимодействия с хранилищем данных.
         /// </summary>
-        private readonly IRepository<Student> _repository 
+        //private readonly IRepository<Student> _repository = new DapperRepository(connectionString);
+        private readonly IRepository<Student> _repository
             = new EFRepository(new StudentContext());
 
         //public Logic()
@@ -63,7 +64,7 @@ namespace BusinessLogic
                 {
                     foreach (char s in values[i])
                     {
-                        if (!char.IsLetter(s) && 
+                        if (!char.IsLetter(s) &&
                             s != ' ')
                         {
                             throw new Exception($"Ошибка: {fieldNames[i]} может содержать только буквы и пробелы.");
@@ -74,14 +75,14 @@ namespace BusinessLogic
                 {
                     foreach (char s in values[i])
                     {
-                        if (!char.IsLetterOrDigit(s) && 
+                        if (!char.IsLetterOrDigit(s) &&
                             s != '-')
                         {
                             throw new Exception("Ошибка: группа может содержать только буквы, цифры и дефис.");
                         }
                     }
 
-                    if (values[i].StartsWith("-") || 
+                    if (values[i].StartsWith("-") ||
                         values[i].EndsWith("-"))
                     {
                         throw new Exception("Ошибка: группа не может начинаться или заканчиваться дефисом.");
@@ -94,10 +95,10 @@ namespace BusinessLogic
                 }
             }
 
-            _repository.Create(new Student 
-            { 
-                Name = values[0], 
-                Speciality = values[1], 
+            _repository.Create(new Student
+            {
+                Name = values[0],
+                Speciality = values[1],
                 Group = values[2]
             });
         }
@@ -120,9 +121,9 @@ namespace BusinessLogic
                 _repository.Delete(students[index]);
             }
             else
-            { 
+            {
                 throw new Exception("Неверный номер.");
-            }    
+            }
         }
         /// <summary>
         /// Формирует двумерный массив со сведениями обо всех студентах
@@ -139,9 +140,9 @@ namespace BusinessLogic
             string[,] table = new string[students.Count, 3];
             for (int i = 0; i < students.Count; i++)
             {
-                table[i,0] = students[i].Name;
-                table[i,1] = students[i].Speciality;
-                table[i,2] = students[i].Group;
+                table[i, 0] = students[i].Name;
+                table[i, 1] = students[i].Speciality;
+                table[i, 2] = students[i].Group;
             }
 
             return table;

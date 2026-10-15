@@ -55,19 +55,7 @@ namespace DataAccessLayer
             return _context.Students.Find(id);
 
         }
-        /// <summary>
-        /// Обновляет данные существующего студента в базе данных и сохраняет изменения.
-        /// </summary>
-        /// <param name="obj">Студент с обновлёнными данными.</param>
-        public void Update(Student obj)
-        {
-            _context.Entry(obj).State = EntityState.Modified;
-            _context.SaveChanges();
-        }
-        /// <summary>
-        /// Удаляет студента из базы данных и сохраняет изменения.
-        /// </summary>
-        /// <param name="obj">Студент, которого необходимо удалить.</param>
+
         public void Delete(Student obj) 
         {
             _context.Set<Student>().Remove(obj);

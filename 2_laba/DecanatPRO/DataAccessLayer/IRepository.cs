@@ -32,11 +32,7 @@ namespace DataAccessLayer
         /// <param name="id">Идентификатор искомого объекта.</param>
         /// <returns>Найденный объект типа T.</returns>
         T ReadById(int id);
-        /// <summary>
-        /// Обновляет данные существующего объекта в хранилище.
-        /// </summary>
-        /// <param name="obj">Объект с обновлёнными данными.</param>
-        void Update(T obj);
+
         /// <summary>
         /// Удаляет объект из хранилища данных.
         /// </summary>
