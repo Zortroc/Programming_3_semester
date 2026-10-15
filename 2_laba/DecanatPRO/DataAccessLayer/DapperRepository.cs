@@ -12,9 +12,7 @@ namespace DataAccessLayer
     /// </summary>
     public class DapperRepository : IRepository<Student>
     {
-        /// <summary>
-        /// Строка подключения к базе данных.
-        /// </summary>
+        
         private string connectionString;
 
         /// <summary>
@@ -26,10 +24,7 @@ namespace DataAccessLayer
             this.connectionString = connectionString;
         }
 
-        /// <summary>
-        /// Выполняет SQL-команду, не возвращающую результат запроса.
-        /// </summary>
-        /// <param name="script">Текст SQL-команды.</param>
+        
         private void UseScript(string script)
         {
             if(!string.IsNullOrEmpty(script))
