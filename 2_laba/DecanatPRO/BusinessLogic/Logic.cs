@@ -18,7 +18,7 @@ namespace BusinessLogic
         /// Репозиторий для выполнения операций со студентами
         /// и взаимодействия с хранилищем данных.
         /// </summary>
-        private readonly IRepository<Student> _repository = new EFRepository(new StudentContext());
+        private readonly IRepository<Student> _repository = new EFRepository(new DataContext());
 
         /// <summary>
         /// Добавляет нового студента после проверки и нормализации
