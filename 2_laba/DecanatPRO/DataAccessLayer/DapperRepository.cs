@@ -12,11 +12,10 @@ namespace DataAccessLayer
 {
     public class DapperRepository : IRepository<Student>
     {
-        private string connectionString;
-
-        public DapperRepository(string connectionString)
+        private readonly string connectionString;
+        public DapperRepository()
         {
-            this.connectionString = connectionString;
+            connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ARDOR\Source\Repos\Programming_3_semester\2_laba\DecanatPRO\DataAccessLayer\Database1.mdf;Integrated Security=True;MultipleActiveResultSets=True";
         }
 
         private void UseScript(string script)
@@ -32,7 +31,7 @@ namespace DataAccessLayer
 
         public void Create(Student student)
         {
-            string script = "INSERT INTO Students (Name, Speciality, [group]) VALUES (" + student.Name + ", " + student.Speciality + "," + student.Group + ")";
+            string script = "INSERT INTO Students (Name, Speciality, [Group]) VALUES ('" + student.Name + "', '" + student.Speciality + "', '" + student.Group + "')";
             UseScript(script);
         }
 

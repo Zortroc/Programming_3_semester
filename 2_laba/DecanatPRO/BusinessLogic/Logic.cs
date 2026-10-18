@@ -18,18 +18,7 @@ namespace BusinessLogic
         /// Репозиторий для выполнения операций со студентами
         /// и взаимодействия с хранилищем данных.
         /// </summary>
-        //private readonly IRepository<Student> _repository = new DapperRepository(connectionString);
-        private readonly IRepository<Student> _repository
-            = new EFRepository(new StudentContext());
-
-        //public Logic()
-        //{
-        //    AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
-        //    AddStudent("Иванов Иван Иванович", "Прикладная информатика", "ГФ25-02Б");
-        //    AddStudent("ffff", "ffff", "ПИ25-01");
-        //    AddStudent("О Степан Сталинович", "Лечебное дело", "ЛД26-01Б");
-        //    AddStudent("О Степан", "Лечебное дело", "ЛД26-01Б");
-        //}
+        private readonly IRepository<Student> _repository = new EFRepository(new StudentContext());
 
         /// <summary>
         /// Добавляет нового студента после проверки и нормализации
