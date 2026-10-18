@@ -11,12 +11,12 @@ namespace DataAccessLayer
     public class EFRepository : IRepository<Student>
     {
         
-        private readonly StudentContext _context;
+        private readonly DataContext _context;
         /// <summary>
         /// Инициализирует репозиторий указанным контекстом базы данных.
         /// </summary>
         /// <param name="context">Контекст Entity Framework для работы со студентами.</param>
-        public EFRepository(StudentContext context)
+        public EFRepository(DataContext context)
         {
             _context = context;
         }

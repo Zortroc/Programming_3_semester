@@ -12,13 +12,13 @@ namespace DataAccessLayer
     /// Контекст Entity Framework, обеспечивающий взаимодействие
     /// между приложением и базой данных студентов.
     /// </summary>
-    public class StudentContext : DbContext
+    public class DataContext : DbContext
     {
         /// <summary>
         /// Создаёт контекст базы данных и устанавливает подключение
         /// с использованием строки подключения StudentConnection.
         /// </summary>
-        public StudentContext() : base("name=StudentConnection")
+        public DataContext() : base("name=StudentConnection")
         {
         }
         /// <summary>
