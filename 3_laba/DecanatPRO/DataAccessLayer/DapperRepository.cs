@@ -15,7 +15,7 @@ namespace DataAccessLayer
         private readonly string connectionString;
         public DapperRepository()
         {
-            connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ARDOR\Source\Repos\Programming_3_semester\2_laba\DecanatPRO\DataAccessLayer\Database1.mdf;Integrated Security=True;MultipleActiveResultSets=True";
+            connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ARDOR\Source\Repos\Programming_3_semester\3_laba\DecanatPRO\DataAccessLayer\Database1.mdf;Integrated Security=True;MultipleActiveResultSets=True";
         }
 
         private void UseScript(string script)
