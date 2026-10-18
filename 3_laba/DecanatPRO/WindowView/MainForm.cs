@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
+using Ninject;
 
 namespace WindowView
 {
     public partial class MainForm : Form
     {
-        private Logic logic = new Logic();
+        private static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
+        private static Logic logic = ninjectKernel.Get<Logic>();
         public MainForm()
         {
             InitializeComponent();
