@@ -10,9 +10,15 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Реализует CRUD-операции для студентов с помощью библиотеки Dapper.
+    /// </summary>
     public class DapperRepository : IRepository<Student>
     {
         private readonly string connectionString;
+        /// <summary>
+        /// Инициализирует репозиторий и задаёт строку подключения к базе данных.
+        /// </summary>
         public DapperRepository()
         {
             connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ARDOR\Source\Repos\Programming_3_semester\3_laba\DecanatPRO\DataAccessLayer\Database1.mdf;Integrated Security=True;MultipleActiveResultSets=True";
@@ -28,13 +34,19 @@ namespace DataAccessLayer
                 }
             }
         }
-
+        /// <summary>
+        /// Добавляет нового студента в базу данных.
+        /// </summary>
+        /// <param name="student">Добавляемый студент.</param>
         public void Create(Student student)
         {
             string script = "INSERT INTO Students (Name, Speciality, [Group]) VALUES ('" + student.Name + "', '" + student.Speciality + "', '" + student.Group + "')";
             UseScript(script);
         }
-
+        /// <summary>
+        /// Возвращает всех студентов из базы данных.
+        /// </summary>
+        /// <returns>Коллекция студентов.</returns>
         public IEnumerable<Student> ReadAll()
         {
             List<Student> students;
@@ -44,7 +56,11 @@ namespace DataAccessLayer
             }
             return students;
         }
-
+        /// <summary>
+        /// Находит студента по идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор студента.</param>
+        /// <returns>Найденный студент или null, если студент не найден.</returns>
         public Student ReadById(int id)
         {
             Student student;
@@ -54,7 +70,10 @@ namespace DataAccessLayer
             }
             return student;
         }
-
+        /// <summary>
+        /// Удаляет студента из базы данных.
+        /// </summary>
+        /// <param name="student">Удаляемый студент.</param>
         public void Delete(Student student) 
         {
             string script = "DELETE FROM Students WHERE Id = " + student.Id;
