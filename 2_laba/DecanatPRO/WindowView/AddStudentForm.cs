@@ -24,20 +24,17 @@ namespace WindowView
         {
             try
             {
+                // Забираем данные из полей ввода и отдаем логике
                 logic.AddStudent(txtName.Text, txtSpeciality.Text, txtGroup.Text);
 
                 MessageBox.Show("Студент добавлен");
-                Close();
+                this.Close(); // закрываем окно ввода
             }
             catch (Exception ex)
-            { 
+            {
+                // Если логика бросила throw (пустое поле или дубликат), показываем текст ошибки
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void AddStudentForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
