@@ -28,7 +28,6 @@ namespace DataAccessLayer
         /// <param name="id">Идентификатор искомого объекта.</param>
         /// <returns>Найденный объект типа T.</returns>
         T ReadById(int id);
-
         /// <summary>
         /// Удаляет объект из хранилища данных.
         /// </summary>

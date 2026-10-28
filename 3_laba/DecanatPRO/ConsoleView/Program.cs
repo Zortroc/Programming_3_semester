@@ -14,6 +14,7 @@ namespace ConsoleView
     {
         
         private static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
+
         private static Logic logic = ninjectKernel.Get<Logic>();
         /// <summary>
         /// Запускает главный цикл приложения, отображает меню
@@ -74,10 +75,7 @@ namespace ConsoleView
                 Console.ReadKey();
             }
         }
-        /// <summary>
-        /// Выводит гистограмму распределения студентов по специальностям,
-        /// используя данные, полученные из бизнес-логики.
-        /// </summary>
+        
         private static void HistogramInput()
         {
             Dictionary<string, int> histogram = logic.ShowHistogram();

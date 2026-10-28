@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
 using Model;
 using DataAccessLayer;
 using System.Linq;
@@ -14,12 +13,12 @@ namespace BusinessLogic
     /// </summary>
     public class Logic
     {
-        /// <summary>
-        /// Репозиторий для выполнения операций со студентами
-        /// и взаимодействия с хранилищем данных.
-        /// </summary>
         private readonly IRepository<Student> _repository;
 
+        /// <summary>
+        /// Инициализирует бизнес-логику с указанным репозиторием студентов.
+        /// </summary>
+        /// <param name="repository">Репозиторий для работы с данными студентов.</param>
         public Logic(IRepository<Student> repository)
         {
             _repository = repository;
