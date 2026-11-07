@@ -50,16 +50,6 @@ namespace WindowView
             }
 
         }
-        private void btnShowHistogram_Click(object sender, EventArgs e)
-        {
-            if (dgvStudents.Rows.Count == 0)
-            {
-                MessageBox.Show("Нет данных для отображения гистограммы.");
-                return;
-            }
-            HistogramForm form = new HistogramForm(logic);
-            form.ShowDialog();
-        }
 
         private void RefreshTable()
         {

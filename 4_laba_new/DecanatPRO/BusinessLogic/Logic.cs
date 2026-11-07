@@ -113,23 +113,5 @@ namespace BusinessLogic
             return studentsList;
         }
 
-        public Dictionary<string, int> ShowHistogram()
-        {
-            Dictionary<string, int> histogram = new Dictionary<string, int>();
-
-            foreach (Student student in students)
-            {
-                if (!histogram.ContainsKey(student.Speciality))
-                {
-                    histogram.Add(student.Speciality, 1);
-                }
-                else
-                {
-                    histogram[student.Speciality]++;
-                }
-            }
-
-            return histogram;
-        }
     }
 }
