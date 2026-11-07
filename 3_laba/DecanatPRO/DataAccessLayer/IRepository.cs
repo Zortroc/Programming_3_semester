@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Model;
 
 namespace DataAccessLayer
@@ -32,7 +28,6 @@ namespace DataAccessLayer
         /// <param name="id">Идентификатор искомого объекта.</param>
         /// <returns>Найденный объект типа T.</returns>
         T ReadById(int id);
-
         /// <summary>
         /// Удаляет объект из хранилища данных.
         /// </summary>

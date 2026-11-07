@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BusinessLogic;
+using Ninject;
 
 namespace ConsoleView
 {
@@ -12,7 +13,9 @@ namespace ConsoleView
     internal class Program
     {
         
-        private static Logic logic = new Logic();
+        private static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
+
+        private static Logic logic = ninjectKernel.Get<Logic>();
         /// <summary>
         /// Запускает главный цикл приложения, отображает меню
         /// и обрабатывает выбранные пользователем команды.
@@ -72,10 +75,7 @@ namespace ConsoleView
                 Console.ReadKey();
             }
         }
-        /// <summary>
-        /// Выводит гистограмму распределения студентов по специальностям,
-        /// используя данные, полученные из бизнес-логики.
-        /// </summary>
+        
         private static void HistogramInput()
         {
             Dictionary<string, int> histogram = logic.ShowHistogram();
