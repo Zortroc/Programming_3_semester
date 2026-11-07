@@ -7,27 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogic;
+using System.Xml.Linq;
 
-namespace WindowView
+
+namespace View
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IView
     {
-        private Logic logic = new Logic();
+
+        public event AddDataDelegate AddDataEvent;
+        public event DeleteDataDelegate DeleteDataEvent;
         public MainForm()
         {
             InitializeComponent();
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            RefreshTable();
         }
-        
+
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
-            AddStudentForm addForm = new AddStudentForm(logic);
-            addForm.ShowDialog();
-            RefreshTable();
+            AddDataEvent?.Invoke(new object[]
+            {
+                textName.Text,
+                textSpeciality.Text,
+                textGroup.Text
+            });
         }
 
         private void btnDeleteStudent_Click(object sender, EventArgs e)
@@ -38,26 +43,26 @@ namespace WindowView
                 return;
             }
 
-            int i = dgvStudents.CurrentRow.Index;
-            try
-            { 
-                logic.DeleteStudent(i + 1);
-                RefreshTable();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            int index = dgvStudents.CurrentRow.Index;
+
+            DeleteDataEvent?.Invoke(index);
 
         }
 
-        private void RefreshTable()
+        public void RedrawForm(IEnumerable<IEnumerable<object>> data)
         {
             dgvStudents.Rows.Clear();
-            List <string[]> table = logic.ShowTableList();
-            foreach (string[] field in table)
+
+            foreach (IEnumerable<object> student in data)
             {
-                dgvStudents.Rows.Add(field);
+                List<object> fields = new List<object>();
+
+                foreach (object field in student)
+                {
+                    fields.Add(field);
+                }
+
+                dgvStudents.Rows.Add(fields.ToArray());
             }
         }
     }
