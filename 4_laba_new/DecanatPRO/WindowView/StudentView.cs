@@ -12,22 +12,32 @@ using System.Xml.Linq;
 
 namespace View
 {
-    public partial class MainForm : Form, IView
+    public partial class StudentView : Form, IView
     {
 
         public event AddDataDelegate AddDataEvent;
         public event DeleteDataDelegate DeleteDataEvent;
-        public MainForm()
+        public StudentView()
         {
             InitializeComponent();
         }
-        private void MainForm_Load(object sender, EventArgs e)
+        private void StudentView_Load(object sender, EventArgs e)
         {
+        }
+        public void RedrawForm(IEnumerable<IEnumerable<object>> data)
+        {
+            dgvStudents.Rows.Clear();
+
+            foreach (IEnumerable<object> student in data)
+            {
+                List<object> fields = new List<object>(student);
+                dgvStudents.Rows.Add(fields.ToArray());
+            }
         }
 
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
-            AddDataEvent?.Invoke(new object[]
+            AddDataEvent?.Invoke(new List<object>()
             {
                 textName.Text,
                 textSpeciality.Text,
@@ -49,21 +59,5 @@ namespace View
 
         }
 
-        public void RedrawForm(IEnumerable<IEnumerable<object>> data)
-        {
-            dgvStudents.Rows.Clear();
-
-            foreach (IEnumerable<object> student in data)
-            {
-                List<object> fields = new List<object>();
-
-                foreach (object field in student)
-                {
-                    fields.Add(field);
-                }
-
-                dgvStudents.Rows.Add(fields.ToArray());
-            }
-        }
     }
 }

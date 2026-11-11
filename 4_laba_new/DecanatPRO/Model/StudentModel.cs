@@ -6,20 +6,10 @@ using System.Text.RegularExpressions;
 namespace Model
 {
 
-    public class Logic : IModel<Student>
+    public class StudentModel : IModel<Student>
     {
+        public event DataChangedDelegate DataChanged;
         private List<Student> students = new List<Student>();
-        public event Action<IEnumerable<IEnumerable<object>>> DataChanged;
-
-        public Logic()
-        {
-            Insert(new Student { Name = "Иванов Иван Иванович", Speciality = "Прикладная информатика", Group = "ГФ25-02Б" });
-            Insert(new Student { Name = "Иванов Иван Иванович", Speciality = "Прикладная информатика", Group = "ГФ25-02Б" });
-            Insert(new Student { Name = "ffff", Speciality = "ffff", Group = "ffff" });
-            Insert(new Student { Name = "О Степан Сталинович", Speciality = "Лечебное дело", Group = "ЛД26-01Б" });
-            Insert(new Student { Name = "О Степан", Speciality = "Лечебное дело", Group = "ЛД26-01Б" });
-        }
-
         public void Insert(Student student)
         {
             string[] values = { student.Name, student.Speciality, student.Group };
@@ -81,7 +71,7 @@ namespace Model
                 Group = values[2]
             });
 
-            NotifyDataChanged();
+            InvokeDataChanged();
         }
 
         public void Delete(int index)
@@ -93,47 +83,24 @@ namespace Model
 
             students.RemoveAt(index);
 
-            NotifyDataChanged();
+            InvokeDataChanged();
         }
 
-        public IEnumerable<IEnumerable<object>> GetData()
+        private void InvokeDataChanged()
         {
-            List<IEnumerable<object>> data =
-                new List<IEnumerable<object>>();
+            List<List<object>> list = new List<List<object>>();
 
-            foreach (Student student in students)
+            for (int i = 0; i < students.Count; i++)
             {
-                data.Add(new object[]
-                {
-                    student.Name,
-                    student.Speciality,
-                    student.Group
-                });
+                Student item = students[i];
+                list.Add(new List<object>());
+                list[i].Add(item.Name);
+                list[i].Add(item.Speciality);
+                list[i].Add(item.Group);
             }
 
-            return data;
+            DataChanged?.Invoke(list);
         }
 
-        private void NotifyDataChanged()
-        {
-            List<List<object>> data = new List<List<object>>();
-
-            foreach (Student student in students)
-            {
-                data.Add(new List<object>
-                {
-                    student.Name,
-                    student.Speciality,
-                    student.Group
-                });
-            }
-
-            DataChanged?.Invoke(data);
-        }
-
-        public void Refresh()
-        {
-            NotifyDataChanged();
-        }
     }
 }

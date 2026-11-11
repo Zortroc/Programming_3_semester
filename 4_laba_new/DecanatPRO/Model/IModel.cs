@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    public delegate void DataChangedDelegate(IEnumerable<IEnumerable<object>> newData);
     public interface IModel<T> where T : class
     {
-        event Action<IEnumerable<IEnumerable<object>>> DataChanged;
-
+        event DataChangedDelegate DataChanged;
         void Insert(T item);
         void Delete(int index);
-        void Refresh();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class MainForm
+    partial class StudentView
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentView));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddStudent = new System.Windows.Forms.Button();
@@ -39,13 +39,13 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpAddStudent = new System.Windows.Forms.GroupBox();
-            this.textName = new System.Windows.Forms.TextBox();
-            this.textSpeciality = new System.Windows.Forms.TextBox();
-            this.textGroup = new System.Windows.Forms.TextBox();
-            this.labelSelectStudent = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textGroup = new System.Windows.Forms.TextBox();
+            this.textSpeciality = new System.Windows.Forms.TextBox();
+            this.textName = new System.Windows.Forms.TextBox();
+            this.labelSelectStudent = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
             this.grpAddStudent.SuspendLayout();
@@ -172,12 +172,39 @@
             this.grpAddStudent.TabStop = false;
             this.grpAddStudent.Text = "Добавление студента";
             // 
-            // textName
+            // label5
             // 
-            this.textName.Location = new System.Drawing.Point(15, 57);
-            this.textName.Name = "textName";
-            this.textName.Size = new System.Drawing.Size(194, 22);
-            this.textName.TabIndex = 3;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 140);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 16);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Группа";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 35);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 16);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "ФИО";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 86);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 16);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Направление";
+            // 
+            // textGroup
+            // 
+            this.textGroup.Location = new System.Drawing.Point(15, 162);
+            this.textGroup.Name = "textGroup";
+            this.textGroup.Size = new System.Drawing.Size(194, 22);
+            this.textGroup.TabIndex = 3;
             // 
             // textSpeciality
             // 
@@ -186,12 +213,12 @@
             this.textSpeciality.Size = new System.Drawing.Size(194, 22);
             this.textSpeciality.TabIndex = 3;
             // 
-            // textGroup
+            // textName
             // 
-            this.textGroup.Location = new System.Drawing.Point(15, 162);
-            this.textGroup.Name = "textGroup";
-            this.textGroup.Size = new System.Drawing.Size(194, 22);
-            this.textGroup.TabIndex = 3;
+            this.textName.Location = new System.Drawing.Point(15, 57);
+            this.textName.Name = "textName";
+            this.textName.Size = new System.Drawing.Size(194, 22);
+            this.textName.TabIndex = 3;
             // 
             // labelSelectStudent
             // 
@@ -204,34 +231,7 @@
             this.labelSelectStudent.Text = "Выберите студента в списке:";
             this.labelSelectStudent.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 89);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 16);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Направление";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 143);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 16);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Группа";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 38);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 16);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "ФИО";
-            // 
-            // MainForm
+            // StudentView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -246,10 +246,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainForm";
+            this.Name = "StudentView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ДеканатПРО МЕНЮ";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Load += new System.EventHandler(this.StudentView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).EndInit();
             this.grpAddStudent.ResumeLayout(false);
