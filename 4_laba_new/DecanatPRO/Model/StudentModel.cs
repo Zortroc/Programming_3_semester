@@ -90,13 +90,14 @@ namespace Model
         {
             List<List<object>> list = new List<List<object>>();
 
-            for (int i = 0; i < students.Count; i++)
+            foreach (Student item in students)
             {
-                Student item = students[i];
-                list.Add(new List<object>());
-                list[i].Add(item.Name);
-                list[i].Add(item.Speciality);
-                list[i].Add(item.Group);
+                list.Add(new List<object>
+                {
+                    item.Name,
+                    item.Speciality,
+                    item.Group
+                });
             }
 
             DataChanged?.Invoke(list);
