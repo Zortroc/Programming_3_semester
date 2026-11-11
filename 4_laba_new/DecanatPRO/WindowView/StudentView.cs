@@ -26,6 +26,9 @@ namespace View
         /// Возникает при запросе пользователя на удаление выбранного студента.
         /// </summary>
         public event DeleteDataDelegate DeleteDataEvent;
+        /// <summary>
+        /// Инициализирует компоненты формы студентов.
+        /// </summary>
         public StudentView()
         {
             InitializeComponent();
@@ -33,6 +36,10 @@ namespace View
         private void StudentView_Load(object sender, EventArgs e)
         {
         }
+        /// <summary>
+        /// Очищает таблицу и отображает переданный список студентов.
+        /// </summary>
+        /// <param name="data">Данные студентов для отображения в таблице.</param>
         public void RedrawForm(IEnumerable<IEnumerable<object>> data)
         {
             dgvStudents.Rows.Clear();
