@@ -12,11 +12,23 @@ using System.Xml.Linq;
 
 namespace View
 {
+    /// <summary>
+    /// Представляет графический интерфейс для отображения списка студентов
+    /// и взаимодействия пользователя с моделью через Presenter.
+    /// </summary>
     public partial class StudentView : Form, IView
     {
-
+        /// <summary>
+        /// Возникает при нажатии пользователем кнопки добавления студента.
+        /// </summary>
         public event AddDataDelegate AddDataEvent;
+        /// <summary>
+        /// Возникает при запросе пользователя на удаление выбранного студента.
+        /// </summary>
         public event DeleteDataDelegate DeleteDataEvent;
+        /// <summary>
+        /// Инициализирует компоненты формы студентов.
+        /// </summary>
         public StudentView()
         {
             InitializeComponent();
@@ -24,6 +36,10 @@ namespace View
         private void StudentView_Load(object sender, EventArgs e)
         {
         }
+        /// <summary>
+        /// Очищает таблицу и отображает переданный список студентов.
+        /// </summary>
+        /// <param name="data">Данные студентов для отображения в таблице.</param>
         public void RedrawForm(IEnumerable<IEnumerable<object>> data)
         {
             dgvStudents.Rows.Clear();

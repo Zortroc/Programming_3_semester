@@ -10,9 +10,8 @@ namespace View
     internal static class Program
     {
         /// <summary>
-        /// Главная точка входа для приложения.
+        /// Запускает форму StudentView напрямую без создания Presenter.
         /// </summary>
-
         [STAThread]
         static void Main()
         {
