@@ -12,10 +12,19 @@ using System.Xml.Linq;
 
 namespace View
 {
+    /// <summary>
+    /// Представляет графический интерфейс для отображения списка студентов
+    /// и взаимодействия пользователя с моделью через Presenter.
+    /// </summary>
     public partial class StudentView : Form, IView
     {
-
+        /// <summary>
+        /// Возникает при нажатии пользователем кнопки добавления студента.
+        /// </summary>
         public event AddDataDelegate AddDataEvent;
+        /// <summary>
+        /// Возникает при запросе пользователя на удаление выбранного студента.
+        /// </summary>
         public event DeleteDataDelegate DeleteDataEvent;
         public StudentView()
         {

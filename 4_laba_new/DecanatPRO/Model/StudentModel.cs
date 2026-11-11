@@ -5,11 +5,22 @@ using System.Text.RegularExpressions;
 
 namespace Model
 {
-
+    /// <summary>
+    /// Реализует модель студентов, обеспечивающую хранение,
+    /// добавление, удаление и проверку данных студентов.
+    /// </summary>
     public class StudentModel : IModel<Student>
     {
+        /// <summary>
+        /// Возникает при изменении списка студентов и передаёт его актуальное содержимое.
+        /// </summary>
         public event DataChangedDelegate DataChanged;
         private List<Student> students = new List<Student>();
+        /// <summary>
+        /// Проверяет данные студента и добавляет его в список.
+        /// После успешного добавления уведомляет об изменении данных.
+        /// </summary>
+        /// <param name="student">Студент, которого необходимо добавить.</param>
         public void Insert(Student student)
         {
             string[] values = { student.Name, student.Speciality, student.Group };
@@ -73,7 +84,11 @@ namespace Model
 
             InvokeDataChanged();
         }
-
+        /// <summary>
+        /// Удаляет студента из списка по указанному индексу.
+        /// После успешного удаления уведомляет об изменении данных.
+        /// </summary>
+        /// <param name="index">Индекс студента, которого необходимо удалить.</param>
         public void Delete(int index)
         {
             if (index < 0 || index >= students.Count)

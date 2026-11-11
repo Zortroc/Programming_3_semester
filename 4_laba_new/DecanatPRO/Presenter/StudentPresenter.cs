@@ -9,10 +9,19 @@ using System.Windows.Forms;
 
 namespace Presenter
 {
+    /// <summary>
+    /// Координирует взаимодействие модели студентов и пользовательского представления.
+    /// Обрабатывает события представления и передаёт данные модели.
+    /// </summary>
     internal class StudentPresenter
     {
         private IModel<Student> model;
-
+        /// <summary>
+        /// Инициализирует Presenter, связывает события модели и представления
+        /// и добавляет начальные данные студентов.
+        /// </summary>
+        /// <param name="view">Представление, с которым взаимодействует Presenter.</param>
+        /// <param name="model">Модель, используемая для работы с данными студентов.</param>
         public StudentPresenter(IView view, IModel<Student> model)
         {
             this.model = model;
