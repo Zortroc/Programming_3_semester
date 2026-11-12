@@ -27,12 +27,7 @@ namespace Presenter
 
             view.AddDataEvent += OnAddData;
             view.DeleteDataEvent += model.Delete;
-
-            model.Insert(new Student { Name = "Иванов Иван Иванович", Speciality = "Прикладная информатика", Group = "ГФ25-02Б" });
-            model.Insert(new Student { Name = "Иванов Иван Иванович", Speciality = "Прикладная информатика", Group = "ГФ25-02Б" });
-            model.Insert(new Student { Name = "ffff", Speciality = "ffff", Group = "ffff" });
-            model.Insert(new Student { Name = "О Степан Сталинович", Speciality = "Лечебное дело", Group = "ЛД26-01Б" });
-            model.Insert(new Student { Name = "О Степан", Speciality = "Лечебное дело", Group = "ЛД26-01Б" });
+            ((StudentModel)model).InvokeDataChanged();
         }
 
         private void OnAddData(IEnumerable<object> data)

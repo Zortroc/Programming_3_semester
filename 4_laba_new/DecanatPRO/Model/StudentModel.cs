@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Model
 {
@@ -19,6 +20,15 @@ namespace Model
         /// После успешного добавления уведомляет об изменении данных.
         /// </summary>
         /// <param name="student">Студент, которого необходимо добавить.</param>
+        /// 
+        public StudentModel()
+        {
+            Insert(new Student { Name = "Иванов Иван Иванович", Speciality = "Прикладная информатика", Group = "ГФ25-02Б" });
+            Insert(new Student { Name = "Иванов Иван Иванович", Speciality = "Прикладная информатика", Group = "ГФ25-02Б" });
+            Insert(new Student { Name = "ffff", Speciality = "ffff", Group = "ffff" });
+            Insert(new Student { Name = "О Степан Сталинович", Speciality = "Лечебное дело", Group = "ЛД26-01Б" });
+            Insert(new Student { Name = "О Степан", Speciality = "Лечебное дело", Group = "ЛД26-01Б" });
+        }
         public void Insert(Student student)
         {
             string[] values = { student.Name, student.Speciality, student.Group };
@@ -99,7 +109,7 @@ namespace Model
             InvokeDataChanged();
         }
 
-        private void InvokeDataChanged()
+        public void InvokeDataChanged()
         {
             List<List<object>> list = new List<List<object>>();
 
