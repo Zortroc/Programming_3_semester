@@ -100,5 +100,11 @@
       <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="decanapro_image.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="decanapro_image.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

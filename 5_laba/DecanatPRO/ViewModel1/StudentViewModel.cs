@@ -12,6 +12,17 @@ namespace ViewModel
 {
     public class StudentViewModel : INotifyPropertyChanged
     {
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         public RelayCommand AddStudentCommand { get; set; }
         public RelayCommand DeleteStudentCommand { get; set; }
@@ -72,6 +83,7 @@ namespace ViewModel
         {
             if (CurrentStudent == null)
             {
+                ErrorMessage = "Ошибка: выберите студента для удаления.";
                 return;
             }
 
@@ -81,6 +93,8 @@ namespace ViewModel
 
             Students.Remove(CurrentStudent);
             CurrentStudent = null;
+
+            ErrorMessage = "";
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -90,21 +104,30 @@ namespace ViewModel
 
         private void AddNewStudent()
         {
-            _logic.AddStudent(
-                NewStudentName,
-                NewStudentSpeciality,
-                NewStudentGroup
-            );
-
-            List<string[]> students = _logic.ShowTableList();
-            string[] student = students[students.Count - 1];
-
-            Students.Add(new Student
+            try
             {
-                Name = student[0],
-                Speciality = student[1],
-                Group = student[2]
-            });
+                _logic.AddStudent(
+                    NewStudentName,
+                    NewStudentSpeciality,
+                    NewStudentGroup
+                );
+
+                List<string[]> students = _logic.ShowTableList();
+                string[] student = students[students.Count - 1];
+
+                Students.Add(new Student
+                {
+                    Name = student[0],
+                    Speciality = student[1],
+                    Group = student[2]
+                });
+
+                ErrorMessage = "";
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
         }
     }
 }

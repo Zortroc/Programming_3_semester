@@ -24,7 +24,25 @@ namespace WPFView
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new StudentViewModel();
+
+            StudentViewModel viewModel = new StudentViewModel();
+            DataContext = viewModel;
+
+            viewModel.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(StudentViewModel.ErrorMessage))
+                {
+                    if (!string.IsNullOrEmpty(viewModel.ErrorMessage))
+                    {
+                        MessageBox.Show(
+                            viewModel.ErrorMessage,
+                            "Ошибка",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error
+                        );
+                    }
+                }
+            };
         }
     }
 }
