@@ -5,6 +5,7 @@
         Icon="/decanapro_image.ico"
         Height="450"
         Width="790"
+        ResizeMode="CanMinimize"
         MinHeight="450"
         MinWidth="790"
         WindowStartupLocation="CenterScreen"
@@ -79,7 +80,11 @@
                           HeadersVisibility="Column"
                           Background="#D3D3D3"
                           BorderBrush="#555555"
+                          CanUserReorderColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserSortColumns="False"
                           BorderThickness="2">
+                    
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ФИО"
